@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chủ - Đặt Sân Bóng</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../dinhdang/style.css">
+</head>
+<header style="display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background-color: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        <div class="logo">
+            <h2 style="color: #00a651; margin: 0;"><i class="fas fa-futbol"></i> Booking Football</h2>
+        </div>
+        
+        <div class="auth-buttons">
+            <a href="dangnhap.html" class="btn-login">Đăng nhập</a>
+            <a href="dangky.html" class="btn-register">Đăng ký</a>
+        </div>
+</header>
+<body>
+
+    <div class="hero-section">
+        <div class="container hero-content">
+            <h1 class="hero-title">Đặt lịch sân bóng nhanh<br>chóng và tiện lợi</h1>
+            <p class="hero-subtitle">Tìm kiếm, xem thông tin sân, chọn khung giờ và đặt sân dễ dàng chỉ với vài bước.
+            </p>
+
+            <div class="search-box">
+                <input type="text" placeholder="Nhập tên sân..." class="search-input">
+                <input type="text" placeholder="Vị trí" class="search-input">
+                <input type="date" class="search-input">
+                <input type="time" class="search-input">
+                <button class="btn-search">Tìm sân</button>
+            </div>
+        </div>
+       
+    </div>
+
+
+    <div class="container">
+        <div class="features-row">
+            <div class="feature-box">
+                <div class="feature-icon"><i class="fas fa-search"></i></div>
+                <div>
+                    <strong>Nhiều lựa chọn</strong>
+                    <p>Hơn 100+ sân bóng chất lượng</p>
+                </div>
+            </div>
+            <div class="feature-box">
+                <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                <div>
+                    <strong>Đặt sân nhanh</strong>
+                    <p>Chỉ 3 bước đơn giản</p>
+                </div>
+            </div>
+            <div class="feature-box">
+                <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                <div>
+                    <strong>Thanh toán an toàn</strong>
+                    <p>Đa dạng phương thức</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-header">
+            <h2>Sân bóng nổi bật</h2>
+            <a href="#" class="view-all">Xem tất cả ></a>
+        </div>
+
+        <div class="pitch-grid" id="field-list">
+        </div>
+
+        <div class="owner-banner">
+            <div>
+                <h2>Bạn là chủ sân bóng?</h2>
+                <p>Đăng ký để quản lý sân và nhận nhiều ưu đãi hấp dẫn.</p>
+            </div>
+            <button class="btn-register">Đăng ký ngay</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>© 2026 Football Booking. All rights reserved.</p>
+    </footer>
+    <script>
+        fetch('http://localhost:8080/api/fields')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('field-list');
+
+                // Xóa hết mấy cái sân cũ đi để chừa chỗ cho sân từ Database
+                container.innerHTML = '';
+
+                // Vòng lặp đúc sân bóng
+                data.forEach(field => {
+                    const linkAnh = (field.images && field.images.length > 0)
+                        ? field.images[0].imageUrl
+                        : '../hinhanh/images (1).jpg';
+                    const cardHTML = `
+                    <a href="../giaodien/datsan.html?id=${field.fieldId}" style="text-decoration:none; color:inherit;">
+                        <div class="pitch-card">
+                            <img src="${linkAnh}" alt="Sân bóng" class="pitch-img">
+                            <div class="pitch-info">
+                                <div class="pitch-header">
+                                    <h3 class="pitch-name">${field.fieldName}</h3>
+                                    <span class="pitch-rating"><i class="fas fa-star"></i> 5.0</span>
+                                </div>
+                                <div class="pitch-footer">
+                                    <span class="pitch-location">${field.address}</span>
+                                    <span class="pitch-price">Xem chi tiết</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                `;
+                    // Đẩy cái thẻ vừa đúc xong ra ngoài màn hình
+                    container.insertAdjacentHTML('beforeend', cardHTML);
+                });
+            })
+            .catch(error => console.error('Lỗi API kìa bro:', error));
+    </script>
+
+</body>
+
+</html>

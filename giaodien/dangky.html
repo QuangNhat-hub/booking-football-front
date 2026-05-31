@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Ký - Booking Football</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../dinhdang/style.css">
+    <link rel="stylesheet" href="../dinhdang/style_athur.css">
+</head>
+<body class="auth-page">
+
+    <div class="auth-wrapper">
+        <div class="auth-card">
+            
+            <div class="auth-left">
+                <div class="auth-left-content">
+                    <h2>Tạo tài khoản mới</h2>
+                    <p>Đăng ký để trải nghiệm đặt sân nhanh chóng, tiện lợi.</p>
+                </div>
+            </div>
+
+            <div class="auth-right">
+                <h2 class="auth-title">Đăng nhập</h2>
+
+                <form action="">
+                   
+                    <div class="input-group">
+                        <label>Số điện thoại</label>
+                        <input type="text" placeholder="Nhập số điện thoại">
+                    </div>
+
+
+                    <div class="input-group">
+                        <label>Mật khẩu</label>
+                        <div class="password-box">
+                            <input type="password" id="passInput" placeholder="Nhập mật khẩu">
+                            <i class="fas fa-eye toggle-password" id="togglePass"></i>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Đăng nhập</button>
+                </form>
+
+                <div class="social-divider">
+                    <span>Hoặc đăng nhập với</span>
+                </div>
+
+                <div class="social-login">
+                    <button class="social-btn google"><i class="fab fa-google"></i></button>
+                    <button class="social-btn facebook"><i class="fab fa-facebook-f"></i></button>
+                    <button class="social-btn twitter"><i class="fab fa-x-twitter"></i></button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <script>
+        const togglePass = document.getElementById('togglePass');
+        const passInput = document.getElementById('passInput');
+
+        togglePass.addEventListener('click', function() {
+            // Đổi type của input giữa 'password' và 'text'
+            const type = passInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passInput.setAttribute('type', type);
+            
+            // Đổi icon con mắt
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+    </script>
+</body>
+</html>

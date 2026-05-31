@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh Toán - Booking Football</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../dinhdang/style.css">
+    <link rel="stylesheet" href="../dinhdang/style2.css">
+    <link rel="stylesheet" href="../dinhdang/style3.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="container nav-content">
+            <div class="logo">
+                <i class="fas fa-futbol"></i> Booking Football
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Trang chủ</a></li>
+                <li><a href="datsan.html">Đặt sân</a></li>
+                <li><a href="#">Giới thiệu</a></li>
+                <li><a href="#">Tin tức</a></li>
+                <li><a href="#">Liên hệ</a></li>
+            </ul>
+            <div class="auth-btns">
+                <button class="btn-outline">Đăng nhập</button>
+                <button class="btn-solid">Đăng ký</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container main-content">
+        <div class="breadcrumb">
+            <a href="index.html">Trang chủ</a> &rsaquo; <a href="#">Đơn hàng</a> &rsaquo; <span>Thanh toán</span>
+        </div>
+
+        <div class="payment-layout">
+
+            <div class="payment-left">
+                <h2 class="page-title">Thanh toán</h2>
+
+                <div class="booking-card">
+                    <h3 class="card-title">Thông tin đơn hàng</h3>
+                    <div class="order-info-grid">
+                        <div class="info-item">
+                            <span>Sân</span>
+                            <strong id="bill-ten-san">Đang tải...</strong>
+                        </div>
+                        <div class="info-item">
+                            <span>Ngày</span>
+                            <strong id="bill-ngay">Đang tải...</strong>
+                        </div>
+                        <div class="info-item">
+                            <span>Khung giờ</span>
+                            <strong id="bill-khung-gio">Đang tải...</strong>
+                        </div>
+                        <div class="info-item">
+                            <span>Thành tiền</span>
+                            <strong id="bill-tong-tien" class="total-price text-orange">0đ</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="booking-card">
+                    <h3 class="card-title">Phương thức thanh toán</h3>
+
+                    <div class="payment-methods">
+                        <label class="method-option active">
+                            <div class="method-left">
+                                <input type="radio" name="payment" checked>
+                                <div>
+                                    <strong>Ví MoMo</strong>
+                                    <p>Thanh toán qua ví MoMo</p>
+                                </div>
+                            </div>
+                            <span class="method-brand text-green">MOMO</span>
+                        </label>
+
+                        <label class="method-option">
+                            <div class="method-left">
+                                <input type="radio" name="payment">
+                                <div>
+                                    <strong>ZaloPay</strong>
+                                    <p>Thanh toán qua ZaloPay</p>
+                                </div>
+                            </div>
+                            <span class="method-brand text-green">Zalo</span>
+                        </label>
+
+                        <label class="method-option">
+                            <div class="method-left">
+                                <input type="radio" name="payment">
+                                <div>
+                                    <strong>Thẻ ngân hàng</strong>
+                                    <p>Visa, MasterCard, JCB</p>
+                                </div>
+                            </div>
+                            <span class="method-brand"><i class="fas fa-credit-card"></i></span>
+                        </label>
+
+                        <label class="method-option">
+                            <div class="method-left">
+                                <input type="radio" name="payment">
+                                <div>
+                                    <strong>Chuyển khoản ngân hàng</strong>
+                                    <p>Chuyển khoản qua tài khoản</p>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <button class="btn-continue mt-20">Thanh toán 300.000đ</button>
+                    <p class="terms-text">Bằng việc thanh toán, bạn đã đồng ý với điều khoản sử dụng</p>
+                </div>
+            </div>
+
+            <div class="payment-right">
+                <h2 class="page-title">Trạng thái đơn</h2>
+
+                <div class="status-tabs">
+                    <button class="tab-btn active">Tất cả</button>
+                    <button class="tab-btn">Chờ thanh toán</button>
+                    <button class="tab-btn">Đã xác nhận</button>
+                    <button class="tab-btn">Đã hủy</button>
+                </div>
+
+                <div class="order-list">
+
+                    <div class="history-card">
+                        <div class="history-header">
+                            <span class="order-id">Mã đơn: #BP250514001</span>
+                            <span class="badge badge-warning">Chờ thanh toán</span>
+                        </div>
+                        <div class="history-body">
+                            <p><i class="fas fa-square"></i> <strong>Sân Galaxy Tân Phú</strong></p>
+                            <p><i class="far fa-calendar-alt"></i> 14/05/2026 - 14:00 - 15:00</p>
+                            <p><i class="fas fa-money-bill-wave"></i> <strong>300.000đ</strong></p>
+                        </div>
+                        <div class="history-footer">
+                            <button class="btn-outline-small text-gray">Thanh toán ngay</button>
+                        </div>
+                    </div>
+
+                    <div class="history-card">
+                        <div class="history-header">
+                            <span class="order-id">Mã đơn: #BP250512005</span>
+                            <span class="badge badge-success">Đã xác nhận</span>
+                        </div>
+                        <div class="history-body">
+                            <p><i class="fas fa-square"></i> <strong>Sân Hoàng Gia</strong></p>
+                            <p><i class="far fa-calendar-alt"></i> 12/05/2026 - 20:00 - 21:00</p>
+                            <p><i class="fas fa-money-bill-wave"></i> <strong>350.000đ</strong></p>
+                        </div>
+                        <div class="history-footer">
+                            <button class="btn-outline-small">Xem chi tiết</button>
+                        </div>
+                    </div>
+
+                    <div class="history-card">
+                        <div class="history-header">
+                            <span class="order-id">Mã đơn: #BP250510075</span>
+                            <span class="badge badge-danger">Đã hủy</span>
+                        </div>
+                        <div class="history-body">
+                            <p><i class="fas fa-square"></i> <strong>Sân Bình Thạnh Sport</strong></p>
+                            <p><i class="far fa-calendar-alt"></i> 10/05/2026 - 16:00 - 17:00</p>
+                            <p><i class="fas fa-money-bill-wave"></i> <strong>280.000đ</strong></p>
+                        </div>
+                        <div class="history-footer">
+                            <button class="btn-outline-small">Xem chi tiết</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div>
+                <h3><i class="fas fa-futbol"></i> Booking Football</h3>
+                <p>Nền tảng đặt sân bóng đá hàng đầu Việt Nam. Nhanh chóng - Tiện lợi - Uy tín.</p>
+                <div class="social-icons">
+                    <i class="fab fa-facebook-f"></i>
+                    <i class="fab fa-youtube"></i>
+                    <i class="fas fa-globe"></i>
+                </div>
+            </div>
+            <div>
+                <h4>DỊCH VỤ</h4>
+                <ul>
+                    <li>Đặt sân</li>
+                    <li>Tìm sân</li>
+                    <li>Giới thiệu</li>
+                    <li>Tin tức</li>
+                </ul>
+            </div>
+            <div>
+                <h4>HỖ TRỢ</h4>
+                <ul>
+                    <li>Hướng dẫn đặt sân</li>
+                    <li>Câu hỏi thường gặp</li>
+                    <li>Chính sách bảo mật</li>
+                    <li>Điều khoản sử dụng</li>
+                </ul>
+            </div>
+            <div>
+                <h4>LIÊN HỆ</h4>
+                <ul>
+                    <li>Hotline: 1900 1234</li>
+                    <li>Email: support@bookingfootball.vn</li>
+                    <li>Địa chỉ: 123 Nguyễn Trãi, Thanh Xuân, Hà Nội</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Booking Football. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // 1. Xử lý click chọn Phương thức thanh toán
+        const paymentOptions = document.querySelectorAll('.method-option');
+
+        paymentOptions.forEach(option => {
+            option.addEventListener('click', function () {
+                // Tắt viền xanh của cái cũ
+                document.querySelector('.method-option.active').classList.remove('active');
+                // Bật viền xanh cho cái mới
+                this.classList.add('active');
+                // Check vào ô radio tương ứng
+                this.querySelector('input[type="radio"]').checked = true;
+            });
+        });
+
+        // 2. Xử lý click chọn Tab trạng thái đơn
+        const tabBtns = document.querySelectorAll('.tab-btn');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', function () {
+                document.querySelector('.tab-btn.active').classList.remove('active');
+                this.classList.add('active');
+            });
+        });
+    </script>
+    <script src="../hd/aftercontinue.js"></script>
+</body>
+
+</html>

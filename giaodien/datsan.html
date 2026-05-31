@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt Sân - Booking Football</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../dinhdang/style2.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="container nav-content">
+            <div class="logo">
+                <i class="fas fa-futbol"></i> Booking Football
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Trang chủ</a></li>
+                <li><a href="datsan.html" class="active">Đặt sân</a></li>
+                <li><a href="#">Giới thiệu</a></li>
+                <li><a href="#">Tin tức</a></li>
+                <li><a href="#">Liên hệ</a></li>
+            </ul>
+
+            <div class="auth-btns">
+
+                <button class="btn-outline">Đăng nhập</button>
+                <a href="../giaodien/dangky.html">
+                    <button class="btn-solid">Đăng ký</button></a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container main-content">
+        <div class="breadcrumb">
+            <a href="index.html">Trang chủ</a> &rsaquo; <span>Đặt sân</span>
+        </div>
+
+        <h2 class="page-title">Đặt sân</h2>
+
+        <div class="booking-layout">
+
+            <aside class="left-col">
+
+                <div class="booking-card">
+                    <h3 class="card-title">Thông tin sân</h3>
+                    <img src="../hinhanh/images (1).jpg" id="anh-san-chi-tiet" alt="Sân" class="detail-img">
+
+                    <h2 class="field-name-large" id="ten-san-chi-tiet">Đang tải tên sân...</h2>
+
+                    <p class="field-address">
+                        <i class="fas fa-map-marker-alt text-red"></i>
+                        <span id="dia-chi-chi-tiet">Đang tải địa chỉ...</span>
+                    </p>
+
+                    <p class="field-rating"><i class="fas fa-star text-yellow"></i> 4.8 đánh giá <span>(120 lượt đánh
+                            giá)</span></p>
+
+                    <div class="facilities-grid">
+                        <span><i class="fas fa-users"></i> Sân 7 người</span>
+                        <span><i class="fas fa-leaf"></i> Cỏ nhân tạo</span>
+                        <span><i class="fas fa-parking"></i> Có giữ xe</span>
+                        <span><i class="fas fa-lightbulb"></i> Mở hệ đèn</span>
+                        <span><i class="fas fa-tint"></i> Nước uống</span>
+                    </div>
+                </div>
+
+                <div class="booking-card">
+                    <div class="calendar-header">
+                        <i class="fas fa-chevron-left"></i>
+                        <strong>Tháng 5, 2026</strong>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="calendar-grid">
+                        <div class="cal-day-name">T2</div>
+                        <div class="cal-day-name">T3</div>
+                        <div class="cal-day-name">T4</div>
+                        <div class="cal-day-name">T5</div>
+                        <div class="cal-day-name">T6</div>
+                        <div class="cal-day-name">T7</div>
+                        <div class="cal-day-name">CN</div>
+
+                        <div class="cal-day">1</div>
+                        <div class="cal-day">2</div>
+                        <div class="cal-day">3</div>
+                        <div class="cal-day">4</div>
+                        <div class="cal-day">5</div>
+                        <div class="cal-day">6</div>
+                        <div class="cal-day">7</div>
+                        <div class="cal-day">8</div>
+                        <div class="cal-day">9</div>
+                        <div class="cal-day">10</div>
+                        <div class="cal-day">11</div>
+                        <div class="cal-day">12</div>
+                        <div class="cal-day">13</div>
+                        <div class="cal-day active">14</div>
+                        <div class="cal-day">15</div>
+                        <div class="cal-day">16</div>
+                        <div class="cal-day">17</div>
+                        <div class="cal-day">18</div>
+                        <div class="cal-day">19</div>
+                        <div class="cal-day">20</div>
+                        <div class="cal-day">21</div>
+                        <div class="cal-day">22</div>
+                        <div class="cal-day">23</div>
+                        <div class="cal-day">24</div>
+                        <div class="cal-day">25</div>
+                        <div class="cal-day">26</div>
+                        <div class="cal-day">27</div>
+                        <div class="cal-day">28</div>
+                        <div class="cal-day">29</div>
+                        <div class="cal-day">30</div>
+                        <div class="cal-day">31</div>
+                    </div>
+                    <div class="calendar-notes">
+                        <p><i class="fas fa-circle"></i> Giờ mở cửa: 05:00 - 23:00</p>
+                        <p><i class="fas fa-circle"></i> Giá có thể thay đổi tùy theo khung giờ</p>
+                    </div>
+                </div>
+            </aside>
+
+            <main class="right-col">
+
+                <div class="booking-card">
+                    <h3 class="card-title">Chọn khung giờ</h3>
+
+                    <div class="time-legend">
+                        <span>
+                            <div class="legend-box available"></div> Còn trống
+                        </span>
+                        <span>
+                            <div class="legend-box booked"></div> Đã đặt
+                        </span>
+                        <span>
+                            <div class="legend-box selected"></div> Đang chọn
+                        </span>
+                    </div>
+
+                    <h4 class="time-section-title">Buổi sáng</h4>
+                    <div class="time-grid">
+                        <div class="time-slot available"><strong>05:00</strong><span>30.000</span></div>
+                        <div class="time-slot available"><strong>06:00</strong><span>80.0000</span></div>
+                        <div class="time-slot available"><strong>07:00</strong><span>150.000</span></div>
+                        <div class="time-slot available"><strong>08:00</strong><span>150.000</span></div>
+                        <div class="time-slot available"><strong>09:00</strong><span>150.000</span></div>
+                        <div class="time-slot available"><strong>10:00</strong><span>150.000</span></div>
+                        <div class="time-slot available"><strong>11:00</strong><span>150.000</span></div>
+                    </div>
+
+                    <h4 class="time-section-title">Buổi chiều</h4>
+                    <div class="time-grid">
+                        <div class="time-slot available"><strong>12:00</strong><span>40.000</span></div>
+                        <div class="time-slot available"><strong>13:00</strong><span>60.000</span></div>
+                        <div class="time-slot available"><strong>14:00</strong><span>150.000</span></div>
+                        <div class="time-slot available"><strong>15:00</strong><span>150.000</span></div>
+                        <div class="time-slot available"><strong>16:00</strong><span>150.000</span></div>
+                        <div class="time-slot available"><strong>17:00</strong><span>150.000</span></div>
+                        <div class="time-slot available"><strong>18:00</strong><span>200.000</span></div>
+                    </div>
+
+                    <h4 class="time-section-title">Buổi tối</h4>
+                    <div class="time-grid">
+                        <div class="time-slot available"><strong>19:00</strong><span>250.000</span></div>
+                        <div class="time-slot available"><strong>20:00</strong><span>250.000</span></div>
+                        <div class="time-slot available"><strong>21:00</strong><span>250.000</span></div>
+                        <div class="time-slot available"><strong>22:00</strong><span>200.000</span></div>
+                        <div class="time-slot available"><strong>23:00</strong><span>150.000</span></div>
+                    </div>
+                </div>
+
+                <div class="booking-card">
+                    <h3 class="card-title">Thông tin đặt sân</h3>
+                    <div class="summary-grid">
+                        <div class="summary-item">
+                            <span>Sân</span>
+                            <strong id="summary-ten-san">Đang tải...</strong>
+                        </div>
+                        <div class="summary-item">
+                            <span>Ngày</span>
+                            <strong id="summary-ngay">14/05/2026</strong>
+                        </div>
+                        <div class="summary-item">
+                            <span>Khung giờ</span>
+                            <strong id="summary-gio">14:00 - 15:00</strong>
+                        </div>
+                        <div class="summary-item">
+                            <span>Thành tiền</span>
+                            <strong id="summary-tien" class="total-price">300.000đ</strong>
+                        </div>
+                    </div>
+
+                    <button id="btn-tiep-tuc" class="btn-continue">Tiếp tục</button>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div>
+                <h3><i class="fas fa-futbol"></i> Booking Football</h3>
+                <p>Nền tảng đặt sân bóng đá hàng đầu Việt Nam. Nhanh chóng - Tiện lợi - Uy tín.</p>
+                <div class="social-icons">
+                    <i class="fab fa-facebook-f"></i>
+                    <i class="fab fa-youtube"></i>
+                    <i class="fas fa-globe"></i>
+                </div>
+            </div>
+            <div>
+                <h4>DỊCH VỤ</h4>
+                <ul>
+                    <li>Đặt sân</li>
+                    <li>Tìm sân</li>
+                    <li>Giới thiệu</li>
+                    <li>Tin tức</li>
+                </ul>
+            </div>
+            <div>
+                <h4>HỖ TRỢ</h4>
+                <ul>
+                    <li>Hướng dẫn đặt sân</li>
+                    <li>Câu hỏi thường gặp</li>
+                    <li>Chính sách bảo mật</li>
+                    <li>Điều khoản sử dụng</li>
+                </ul>
+            </div>
+            <div>
+                <h4>LIÊN HỆ</h4>
+                <ul>
+                    <li>Hotline: 1900 1234</li>
+                    <li>Email: support@bookingfootball.vn</li>
+                    <li>Địa chỉ: 123 Nguyễn Trãi, Thanh Xuân, Hà Nội</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Booking Football. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="../hd/obox1.js"></script>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id');
+
+        if (id) {
+            fetch('http://localhost:8080/api/fields/' + id)
+                .then(res => res.json())
+                .then(field => {
+                    // Nhét data vào đúng mấy cái ID mình vừa đặt
+                    document.getElementById('ten-san-chi-tiet').innerText = field.fieldName;
+                    document.getElementById('dia-chi-chi-tiet').innerText = field.address;
+                    document.getElementById('summary-ten-san').innerText = field.fieldName;
+                })
+                .catch(error => console.error('Lỗi rùi bro:', error));
+        }
+    </script>
+    <script src="../hd/datsanimage.js"></script>
+    <script src="../hd/continuebuton.js"></script>
+
+</body>
+
+</html>
