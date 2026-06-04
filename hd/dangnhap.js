@@ -34,7 +34,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
                 window.location.href = 'admin_index.html'; 
             } else {
                 // Nếu là User (roleId === 2) -> Chuyển hướng sang trang chủ Đặt sân
-                window.location.href = 'index.html'; 
+                window.location.href = 'index2.html'; 
             }
             
         } else {

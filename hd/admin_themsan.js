@@ -1,52 +1,39 @@
 document.getElementById('addFieldForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Chặn hành vi tải lại trang mặc định của Form
+    event.preventDefault(); 
 
-    // 1. Lấy dữ liệu từ các ô nhập liệu
-    const fieldNameInput = document.getElementById('fieldName').value;
-    const addressInput = document.getElementById('address').value;
-    const fieldTypeIdInput = document.getElementById('fieldTypeId').value;
-    const descriptionInput = document.getElementById('description').value;
-    const imageUrlInput = document.getElementById('imageUrl').value;
+    // Dùng FormData để chứa cả chữ lẫn file (hình ảnh)
+    const formData = new FormData();
+    formData.append('fieldName', document.getElementById('fieldName').value);
+    formData.append('address', document.getElementById('address').value);
+    formData.append('fieldTypeId', document.getElementById('fieldTypeId').value);
+    formData.append('description', document.getElementById('description').value);
+    formData.append('status', true);
 
-    // 2. Đóng gói dữ liệu thành chuẩn JSON
-    // Lưu ý: Do FieldType là một bảng khác liên kết bằng Khóa ngoại, 
-    // ta cần bọc nó trong một object fieldType như bên dưới để Spring Boot hiểu.
-    const newFieldData = {
-        fieldName: fieldNameInput,
-        address: addressInput,
-        description: descriptionInput,
-        status: true, // Mặc định sân mới tạo sẽ luôn hiển thị "Đang hoạt động"
-        fieldType: {
-            fieldTypeId: parseInt(fieldTypeIdInput) 
-        },
-        images: [
-            { imageUrl: imageUrlInput }
-        ]
-    };
+    // Lấy file ảnh Admin vừa chọn nhét vào hộp
+    const fileInput = document.getElementById('imageFile');
+    if (fileInput.files.length > 0) {
+        formData.append('image', fileInput.files[0]);
+    }
 
-    // 3. Gửi dữ liệu qua Backend bằng method POST
-    fetch('http://localhost:8080/api/fields', {
+    // Gửi qua Backend (Lưu ý: KHÔNG set headers Content-Type, trình duyệt sẽ tự động lo việc này)
+    fetch('http://localhost:8080/api/fields/upload', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newFieldData)
+        body: formData
     })
     .then(async response => {
         if (response.ok) {
-            alert('Thêm sân bóng mới thành công!');
-            window.location.href = 'admin_index.html'; // Tự động quay về danh sách sân
+            alert('Thêm sân bóng thành công!');
+            window.location.href = 'admin_index.html';
         } else {
             const errorText = await response.text();
-            alert('Lỗi khi thêm sân: ' + errorText);
+            alert('Lỗi: ' + errorText);
         }
     })
     .catch(error => {
-        console.error('Lỗi kết nối API:', error);
-        alert('Không thể kết nối đến máy chủ Backend!');
+        console.error('Lỗi:', error);
+        alert('Không thể kết nối máy chủ!');
     });
 });
-
 // Hàm Đăng xuất
 function logout() {
     localStorage.removeItem('currentUser');
