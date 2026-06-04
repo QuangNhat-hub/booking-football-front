@@ -10,11 +10,11 @@ document.getElementById('registerForm').addEventListener('submit', function(even
 
     // 2. Gói dữ liệu lại thành cục JSON
     const dataToSend = {
-        FullName: hoTen,
-        Phone: soDienThoai,
-        Email: email,
-        Password: matKhau,
-        Role_id: 2 // Mặc định khách hàng đăng ký là Role 2
+        fullName: hoTen,       // Sửa thành f thường
+        phone: soDienThoai,    // Sửa thành p thường
+        email: email,          // Sửa thành e thường
+        password: matKhau,     // Sửa thành p thường
+        roleId: 2              // Sửa Role_id thành roleId
     };
 
     // 3. Gửi lên Backend API (Thay đường dẫn này bằng API thực tế của bạn)
@@ -36,5 +36,7 @@ document.getElementById('registerForm').addEventListener('submit', function(even
     })
     .catch(error => {
         console.error('Lỗi kết nối API:', error);
+        alert('Không thể kết nối đến máy chủ. Vui lòng kiểm tra lại Backend!'); // Thêm dòng này
     });
+    
 });
