@@ -10,3 +10,4 @@
     if (dataNgayDat) document.getElementById('bill-ngay').innerText = dataNgayDat;
     if (dataGioDat) document.getElementById('bill-khung-gio').innerText = dataGioDat;
     if (dataTongTien) document.getElementById('bill-tong-tien').innerText = dataTongTien;
+                document.getElementById("bill-tong-tien-button").innerText = dataTongTien;
