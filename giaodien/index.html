@@ -28,8 +28,8 @@
     </div>
 
     <div class="auth-buttons">
-      <a href="dangky.html" class="btn-login">Đăng nhập</a>
-      <a href="dangnhap.html" class="btn-register">Đăng ký</a>
+      <a href="dangnhap.html" class="btn-login">Đăng nhập</a>
+      <a href="dangky.html" class="btn-register">Đăng ký</a>
       <a href="Quanlidon.html" class="btn-register" style= "background-color:#17a2b8;">Lich su dat san </a>
       <!-- Da thay doi -->
     </div>
@@ -135,24 +135,36 @@
         </div>
     </footer>
     <script>
-      fetch("http://localhost:8080/api/fields")
+fetch("http://localhost:8080/api/fields")
         .then((response) => response.json())
         .then((data) => {
           const container = document.getElementById("field-list");
-
-          // Xóa hết mấy cái sân cũ đi để chừa chỗ cho sân từ Database
           container.innerHTML = "";
 
-          // Vòng lặp đúc sân bóng
           data.forEach((field) => {
-            const linkAnh =
-              field.images && field.images.length > 0
+            const linkAnh = field.images && field.images.length > 0
                 ? field.images[0].imageUrl
                 : "../hinhanh/images (1).jpg";
+            
+            // 1. Đọc trạng thái từ Database
+            const isMaintenance = field.status === false;
+            
+            // 2. Chế tạo Giao diện dựa theo trạng thái
+            const imgStyle = isMaintenance ? 'filter: grayscale(100%);' : '';
+            const badgeHTML = isMaintenance 
+                ? `<div style="position: absolute; top: 10px; right: 10px; background-color: #dc3545; color: white; padding: 5px 10px; border-radius: 5px; font-weight: bold; font-size: 12px; z-index: 10;">Bảo trì</div>` 
+                : '';
+            
+            // 3. Xử lý logic Click: Nếu bảo trì thì chặn click và báo lỗi, nếu không thì vào datsan.html
+            const targetLink = isMaintenance ? 'javascript:void(0)' : `../giaodien/datsan.html?id=${field.fieldId}`;
+            const clickEvent = isMaintenance ? `onclick="alert('Sân bóng này hiện đang được bảo trì. Vui lòng chọn sân khác!');"` : '';
+
+            // 4. Đúc HTML
             const cardHTML = `
-                    <a href="../giaodien/datsan.html?id=${field.fieldId}" style="text-decoration:none; color:inherit;">
+                    <a href="${targetLink}" ${clickEvent} style="text-decoration:none; color:inherit; display:block; position: relative;">
                         <div class="pitch-card">
-                            <img src="${linkAnh}" alt="Sân bóng" class="pitch-img">
+                            ${badgeHTML}
+                            <img src="${linkAnh}" alt="Sân bóng" class="pitch-img" style="${imgStyle}">
                             <div class="pitch-info">
                                 <div class="pitch-header">
                                     <h3 class="pitch-name">${field.fieldName}</h3>
@@ -160,13 +172,14 @@
                                 </div>
                                 <div class="pitch-footer">
                                     <span class="pitch-location">${field.address}</span>
-                                    <span class="pitch-price">Xem chi tiết</span>
+                                    <span class="pitch-price" style="${isMaintenance ? 'color: #dc3545; font-weight: bold;' : ''}">
+                                        ${isMaintenance ? 'Tạm ngưng phục vụ' : 'Xem chi tiết'}
+                                    </span>
                                 </div>
                             </div>
                         </div>
                     </a>
                 `;
-            // Đẩy cái thẻ vừa đúc xong ra ngoài màn hình
             container.insertAdjacentHTML("beforeend", cardHTML);
           });
         })

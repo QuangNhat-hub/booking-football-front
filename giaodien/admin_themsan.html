@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thêm Sân Mới - Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link rel="stylesheet" href="../dinhdang/style.css" />
+    <link rel="stylesheet" href="../dinhdang/style2.css" />
+    <link rel="stylesheet" href="../dinhdang/style4.css" />
+    <style>
+        /* CSS viết tạm ở đây cho form đẹp, bạn có thể chuyển sang style4.css sau */
+        .admin-form-container { max-width: 800px; margin: 40px auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-weight: bold; margin-bottom: 8px; color: #333; }
+        .form-control { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px; }
+        .form-control:focus { border-color: #00a651; outline: none; }
+        textarea.form-control { resize: vertical; min-height: 100px; }
+        .btn-submit-form { background-color: #00a651; color: white; padding: 12px 25px; border: none; border-radius: 4px; font-size: 16px; font-weight: bold; cursor: pointer; width: 100%; }
+        .btn-submit-form:hover { background-color: #008f45; }
+        .back-link { display: inline-block; margin-bottom: 20px; color: #666; text-decoration: none; font-weight: bold; }
+        .back-link:hover { color: #00a651; }
+    </style>
+  </head>
+  <body style="background-color: #f4f6f9;">
+    
+    <header class="admin-header">
+      <div class="logo">
+        <h2 style="color: #00a651; margin: 0"><i class="fas fa-plus-circle"></i> Thêm Sân Bóng Mới</h2>
+      </div>
+      <div class="auth-buttons">
+        <button onclick="logout()" class="btn-logout">Đăng xuất</button>
+      </div>
+    </header>
+
+    <div class="container">
+        <div class="admin-form-container">
+            <a href="admin_index.html" class="back-link"><i class="fas fa-arrow-left"></i> Quay lại danh sách</a>
+            
+            <form id="addFieldForm">
+                <div class="form-group">
+                    <label>Tên sân bóng <span style="color:red">*</span></label>
+                    <input type="text" id="fieldName" class="form-control" placeholder="VD: Sân Galaxy Tân Phú" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Địa chỉ <span style="color:red">*</span></label>
+                    <input type="text" id="address" class="form-control" placeholder="Nhập địa chỉ đầy đủ" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Loại sân (ID) <span style="color:red">*</span></label>
+                    <input type="number" id="fieldTypeId" class="form-control" placeholder="VD: 1 (Sân 5 người), 2 (Sân 7 người)..." required>
+                </div>
+
+                <div class="form-group">
+                    <label>Mô tả chi tiết</label>
+                    <textarea id="description" class="form-control" placeholder="Tiện ích, mặt cỏ, chỗ để xe..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit-form"><i class="fas fa-save"></i> Lưu Sân Bóng</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Đường dẫn ảnh minh họa</label>
+        <input type="text" id="imageUrl" class="form-control" placeholder="VD: ../hinhanh/san-moi.jpg">
+    </div>
+    <script src="../hd/admin_themsan.js"></script>
+  </body>
+</html>

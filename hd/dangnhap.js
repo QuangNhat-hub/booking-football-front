@@ -21,10 +21,22 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     })
     .then(async response => {
         if (response.ok) {
+            // Lấy thông tin user từ Backend gửi về
             const result = await response.json(); 
+            
+            // Lưu thông tin vào bộ nhớ tạm
             localStorage.setItem('currentUser', JSON.stringify(result));
             alert('Đăng nhập thành công!');
-            window.location.href = 'index.html'; 
+            
+            // BẮT ĐẦU BẺ NHÁNH DỰA VÀO ROLE_ID:
+            if (result.roleId === 1) { 
+                // Nếu là Admin -> Chuyển hướng sang trang Quản trị
+                window.location.href = 'admin_index.html'; 
+            } else {
+                // Nếu là User (roleId === 2) -> Chuyển hướng sang trang chủ Đặt sân
+                window.location.href = 'index.html'; 
+            }
+            
         } else {
             const errorText = await response.text();
             alert('Đăng nhập thất bại: ' + errorText);
