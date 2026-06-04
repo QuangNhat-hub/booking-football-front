@@ -7,7 +7,7 @@ function renderFields(data) {
             <div style="grid-column: 1 / -1; text-align: center; padding: 40px; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
                 <i class="fas fa-search" style="font-size: 40px; color: #ccc; margin-bottom: 15px;"></i>
                 <h3 style="color: #e74c3c; font-size: 20px;">Không tìm thấy sân!</h3>
-                <p style="color: #777; margin-top: 5px;">Thử đổi tên, vị trí hoặc chọn khung giờ khác xem sao babi nhé.</p>
+                <p style="color: #777; margin-top: 5px;">Thử đổi tên hoặc vị trí khác xem sao babi nhé.</p>
             </div>
         `;
         return;
@@ -42,20 +42,16 @@ fetch("http://localhost:8080/api/fields")
   .then(data => renderFields(data))
   .catch(err => console.error("Lỗi:", err));
 
-// 2. TÌM KIẾM ĐẦY ĐỦ 4 TIÊU CHÍ
+// 2. TÌM KIẾM THEO TÊN VÀ VỊ TRÍ
 document.getElementById('btn-search').addEventListener('click', function(e) {
     e.preventDefault();
 
     const name = document.getElementById('input-name').value.trim();
     const address = document.getElementById('input-address').value.trim();
-    const date = document.getElementById('input-date').value; // Sẽ ra định dạng chuẩn 2026-10-29
-    const time = document.getElementById('input-time').value; // Sẽ ra định dạng chuẩn 14:30
 
     const queryParams = new URLSearchParams();
     if (name) queryParams.append('name', name);
     if (address) queryParams.append('address', address);
-    if (date) queryParams.append('date', date);
-    if (time) queryParams.append('time', time);
 
     const apiUrl = `http://localhost:8080/api/fields/search?${queryParams.toString()}`;
     
