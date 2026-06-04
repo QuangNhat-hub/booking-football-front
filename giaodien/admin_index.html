@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trang Quản Trị - Booking Football</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link rel="stylesheet" href="../dinhdang/style.css" />
+    <link rel="stylesheet" href="../dinhdang/style2.css">
+    <link rel="stylesheet" href="../dinhdang/style4.css" />
+  </head>
+  <body>
+    <header class="admin-header">
+      <div class="logo">
+        <h2 style="color: #00a651; margin: 0"><i class="fas fa-user-shield"></i> Admin Dashboard</h2>
+      </div>    
+
+      <div class="auth-buttons">
+        <span style="margin-right: 20px; font-weight: bold; color: #333;" id="adminName">Đang tải...</span>
+        <button onclick="logout()" class="btn-logout">Đăng xuất</button>
+      </div>
+    </header>
+
+    <div class="hero-section admin-hero">
+      <div class="container hero-content">
+        <h1 class="hero-title">Hệ Thống Quản Trị Sân Bóng</h1>
+        <p class="hero-subtitle">Thêm, sửa, xóa thông tin sân và quản lý toàn bộ đơn đặt sân của khách hàng.</p>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="features-row" style="margin-top: 30px;">
+        <div class="feature-box" style="cursor: pointer; background-color: #e8f5e9;">
+          <div class="feature-icon" style="color: #00a651;"><i class="fas fa-futbol"></i></div>
+          <div>
+            <strong>Quản lý sân bóng</strong>
+            <p>Sân đang hoạt động</p>
+          </div>
+        </div>
+        <a href="admin_quanlydon.html" style="text-decoration: none; color: inherit;" class="feature-box">
+          <div class="feature-icon" style="color: #17a2b8;"><i class="fas fa-clipboard-list"></i></div>
+          <div>
+            <strong>Quản lý đơn đặt</strong>
+            <p>Xử lý giao dịch khách hàng</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="section-header" style="margin-top: 40px;">
+        <h2>Danh sách sân bóng</h2>
+        <a href="admin_themsan.html" class="btn-admin-action btn-add-new"><i class="fas fa-plus"></i> Thêm sân mới</a>
+      </div>
+
+      <div class="pitch-grid" id="admin-field-list"></div>
+    </div>
+
+    <script src="../hd/admin_index.js"></script>
+  </body>
+</html>
