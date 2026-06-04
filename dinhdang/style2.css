@@ -290,3 +290,16 @@
     background: transparent;
     cursor: default;
 }
+.btn-continue:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+.time-slot.booked{
+    background:#ddd;
+    pointer-events:none;
+    opacity:0.5;
+}
+
+.time-slot.selected{
+    border:2px solid #28a745;
+}

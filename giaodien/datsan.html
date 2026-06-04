@@ -226,7 +226,9 @@
     <script>
 let currentDate = new Date();
 let selectedDate = null;
-
+let selectedHour = null;
+let selectedPrice = 0;
+const btnTiepTuc = document.getElementById("btn-tiep-tuc"); function checkBookingReady() { btnTiepTuc.disabled = !(selectedDate && selectedHour); }
 const calendarGrid = document.getElementById("calendar-grid");
 const calendarTitle = document.getElementById("calendar-title");
 const summaryNgay = document.getElementById("summary-ngay");
@@ -284,14 +286,22 @@ function renderCalendar() {
         if (isPastDate(date)) {
             div.classList.add("disabled");
         } else {
-            div.addEventListener("click", function () {
-                document.querySelectorAll(".cal-day").forEach(d => d.classList.remove("active"));
+           div.addEventListener("click", async function () {
 
-                div.classList.add("active");
-                selectedDate = date;
+    document.querySelectorAll(".cal-day")
+        .forEach(d => d.classList.remove("active"));
 
-                summaryNgay.innerText = formatDateVN(date);
-            });
+    div.classList.add("active");
+
+   selectedDate = date;
+
+    summaryNgay.innerText =
+        formatDateVN(date);
+
+    checkBookingReady();
+
+    await loadBookedHours();
+});
         }
 
         calendarGrid.appendChild(div);
@@ -307,20 +317,153 @@ document.getElementById("next-month").addEventListener("click", function () {
     currentDate.setMonth(currentDate.getMonth() + 1);
     renderCalendar();
 });
+const summaryGio = document.getElementById("summary-gio");
+const summaryTien = document.getElementById("summary-tien");
 
-document.getElementById("btn-tiep-tuc").addEventListener("click", function (e) {
-    if (!selectedDate) {
-        alert("Vui lòng chọn ngày đặt sân!");
-        e.preventDefault();
-        return;
-    }
+document.querySelectorAll(".time-slot").forEach(slot => {
 
-    if (isPastDate(selectedDate)) {
-        alert("Không thể đặt sân trong quá khứ!");
-        e.preventDefault();
-        return;
-    }
+    slot.addEventListener("click", () => {
+
+        if (slot.classList.contains("booked")) {
+            return;
+        }
+
+        document.querySelectorAll(".time-slot")
+            .forEach(s => s.classList.remove("selected"));
+
+        slot.classList.add("selected");
+
+        selectedHour =
+            slot.querySelector("strong").innerText;
+
+        selectedPrice =
+            parseInt(
+                slot.querySelector("span")
+                    .innerText
+                    .replace(/\./g, "")
+            );
+
+        summaryGio.innerText = selectedHour;
+
+        summaryTien.innerText =
+            selectedPrice.toLocaleString("vi-VN") + "đ";
+            checkBookingReady();
+    });
+
 });
+document.getElementById("btn-tiep-tuc")
+.addEventListener("click", async () => {
+
+    if (!selectedDate) {
+        alert("Chọn ngày");
+        return;
+    }
+
+    if (!selectedHour) {
+        alert("Chọn giờ");
+        return;
+    }
+
+    const userId =
+        localStorage.getItem("userId");
+
+    if (!userId) {
+        alert("Vui lòng đăng nhập");
+        return;
+    }
+
+    const dateString =
+        selectedDate.toISOString()
+            .split("T")[0];
+
+    const startTime =
+        `${dateString}T${selectedHour}:00`;
+
+    const bookingData = {
+        userId: Number(userId),
+        pitchId: Number(id),
+        startTime: startTime,
+        hours: 1
+    };
+
+    try {
+
+        const response =
+            await fetch(
+                "http://localhost:8080/api/bookings",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+                    body: JSON.stringify(
+                        bookingData
+                    )
+                }
+            );
+
+        const result =
+            await response.text();
+
+        if (!response.ok) {
+            throw new Error(result);
+        }
+
+        alert("Đặt sân thành công");
+
+        await loadBookedHours();
+
+    } catch (err) {
+
+        alert(err.message);
+    }
+
+});
+async function loadBookedHours() {
+
+    if (!selectedDate || !id) return;
+
+    const response =
+        await fetch(
+            `http://localhost:8080/api/bookings/field/${id}`
+        );
+
+    const bookings =
+        await response.json();
+
+    document.querySelectorAll(".time-slot")
+        .forEach(slot => {
+            slot.classList.remove("booked");
+        });
+
+    const selectedDateString =
+        selectedDate.toISOString().split("T")[0];
+
+    bookings.forEach(booking => {
+
+        const bookingDate =
+            booking.startTime.split("T")[0];
+
+        if (bookingDate !== selectedDateString)
+            return;
+
+        const bookingHour =
+            booking.startTime.substring(11,16);
+
+        document.querySelectorAll(".time-slot")
+            .forEach(slot => {
+
+                const hour =
+                    slot.querySelector("strong")
+                        .innerText;
+
+                if (hour === bookingHour) {
+                    slot.classList.add("booked");
+                }
+            });
+    });
+}
 
 renderCalendar();
 </script>
