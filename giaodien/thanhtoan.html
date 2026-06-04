@@ -90,29 +90,36 @@
                             <span class="method-brand text-green">Zalo</span>
                         </label>
 
-                        <label class="method-option">
-                            <div class="method-left">
-                                <input type="radio" name="payment">
-                                <div>
-                                    <strong>Thẻ ngân hàng</strong>
-                                    <p>Visa, MasterCard, JCB</p>
-                                </div>
-                            </div>
-                            <span class="method-brand"><i class="fas fa-credit-card"></i></span>
-                        </label>
 
-                        <label class="method-option">
-                            <div class="method-left">
-                                <input type="radio" name="payment">
-                                <div>
-                                    <strong>Chuyển khoản ngân hàng</strong>
-                                    <p>Chuyển khoản qua tài khoản</p>
-                                </div>
-                            </div>
-                        </label>
                     </div>
 
-                    <button class="btn-continue mt-20">Thanh toán 300.000đ</button>
+                    <button id="btn-thanh-toan" class="btn-continue mt-20">
+                            Thanh toán <span id="bill-tong-tien-button">0đ</span>
+                    </button>
+                   <div id="qr-box" style="display:none; margin-top:20px; text-align:center;">
+    <h3>Quét mã QR để thanh toán</h3>
+
+        <img id="qr-image" src="" alt="QR thanh toán"
+            style="width:220px;height:220px;">
+
+        <p>
+            Mã QR hết hạn sau:
+            <strong id="qr-countdown">05:00</strong>
+        </p>
+
+    <div style="margin-top:15px;">
+        <button id="btn-success"
+            style="background:green;color:white;padding:10px 20px;border:none;border-radius:5px;">
+            Xác nhận thanh toán thành công
+        </button>
+
+        <button id="btn-cancel"
+            style="background:red;color:white;padding:10px 20px;border:none;border-radius:5px;">
+            Hủy thanh toán
+        </button>
+    </div>
+</div>
+                    
                     <p class="terms-text">Bằng việc thanh toán, bạn đã đồng ý với điều khoản sử dụng</p>
                 </div>
             </div>
@@ -127,54 +134,9 @@
                     <button class="tab-btn">Đã hủy</button>
                 </div>
 
-                <div class="order-list">
-
-                    <div class="history-card">
-                        <div class="history-header">
-                            <span class="order-id">Mã đơn: #BP250514001</span>
-                            <span class="badge badge-warning">Chờ thanh toán</span>
-                        </div>
-                        <div class="history-body">
-                            <p><i class="fas fa-square"></i> <strong>Sân Galaxy Tân Phú</strong></p>
-                            <p><i class="far fa-calendar-alt"></i> 14/05/2026 - 14:00 - 15:00</p>
-                            <p><i class="fas fa-money-bill-wave"></i> <strong>300.000đ</strong></p>
-                        </div>
-                        <div class="history-footer">
-                            <button class="btn-outline-small text-gray">Thanh toán ngay</button>
-                        </div>
-                    </div>
-
-                    <div class="history-card">
-                        <div class="history-header">
-                            <span class="order-id">Mã đơn: #BP250512005</span>
-                            <span class="badge badge-success">Đã xác nhận</span>
-                        </div>
-                        <div class="history-body">
-                            <p><i class="fas fa-square"></i> <strong>Sân Hoàng Gia</strong></p>
-                            <p><i class="far fa-calendar-alt"></i> 12/05/2026 - 20:00 - 21:00</p>
-                            <p><i class="fas fa-money-bill-wave"></i> <strong>350.000đ</strong></p>
-                        </div>
-                        <div class="history-footer">
-                            <button class="btn-outline-small">Xem chi tiết</button>
-                        </div>
-                    </div>
-
-                    <div class="history-card">
-                        <div class="history-header">
-                            <span class="order-id">Mã đơn: #BP250510075</span>
-                            <span class="badge badge-danger">Đã hủy</span>
-                        </div>
-                        <div class="history-body">
-                            <p><i class="fas fa-square"></i> <strong>Sân Bình Thạnh Sport</strong></p>
-                            <p><i class="far fa-calendar-alt"></i> 10/05/2026 - 16:00 - 17:00</p>
-                            <p><i class="fas fa-money-bill-wave"></i> <strong>280.000đ</strong></p>
-                        </div>
-                        <div class="history-footer">
-                            <button class="btn-outline-small">Xem chi tiết</button>
-                        </div>
-                    </div>
-
-                </div>
+                <div class="status-content">
+                    <p>Hiện tại bạn chưa có đơn hàng nào.</p>
+                
             </div>
 
         </div>
@@ -249,6 +211,178 @@
         });
     </script>
     <script src="../hd/aftercontinue.js"></script>
+
+
+
+
+
+<script>
+    const btnThanhToan = document.getElementById("btn-thanh-toan");
+    const qrBox = document.getElementById("qr-box");
+    const qrImage = document.getElementById("qr-image");
+    const countdownText = document.getElementById("qr-countdown");
+
+    let countdownInterval;
+
+    btnThanhToan.addEventListener("click", function () {
+        const soTienText = document.getElementById("bill-tong-tien-button").innerText;
+        const soTien = soTienText.replace(/\D/g, "");
+
+        if (!soTien || soTien === "0") {
+            alert("Số tiền thanh toán không hợp lệ!");
+            return;
+        }
+
+        const noiDung = "Thanh toan san bong";
+        const qrContent = `So tien: ${soTien} VND - Noi dung: ${noiDung}`;
+
+        qrImage.src = "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=" 
+            + encodeURIComponent(qrContent);
+
+        qrBox.style.display = "block";
+
+        startCountdown(5 * 60);
+    });
+
+    function startCountdown(seconds) {
+        clearInterval(countdownInterval);
+
+        let timeLeft = seconds;
+
+        countdownInterval = setInterval(function () {
+            const minutes = Math.floor(timeLeft / 60);
+            const secondsLeft = timeLeft % 60;
+
+            countdownText.innerText =
+                String(minutes).padStart(2, "0") + ":" +
+                String(secondsLeft).padStart(2, "0");
+
+            if (timeLeft <= 0) {
+                clearInterval(countdownInterval);
+                qrBox.style.display = "none";
+                qrImage.src = "";
+                alert("Mã QR đã hết hạn. Vui lòng tạo lại mã mới.");
+            }
+
+            timeLeft--;
+        }, 1000);
+    }
+</script>
+
+
+
+<script>
+const btnSuccess = document.getElementById("btn-success");
+const btnCancel = document.getElementById("btn-cancel");
+
+btnSuccess.addEventListener("click", function () {
+    localStorage.setItem("bookingStatus", "success");
+    localStorage.setItem("bookingField", document.getElementById("bill-ten-san").innerText);
+    localStorage.setItem("bookingDate", document.getElementById("bill-ngay").innerText);
+    localStorage.setItem("bookingTime", document.getElementById("bill-khung-gio").innerText);
+    localStorage.setItem("bookingPrice", document.getElementById("bill-tong-tien").innerText);
+    
+    
+    
+    
+    clearInterval(countdownInterval);
+
+    qrBox.style.display = "none";
+
+    document.querySelector(".status-content").innerHTML = `
+        <div class="booking-card">
+            <h3 style="color:green">
+                <i class="fas fa-check-circle"></i>
+                Đã xác nhận
+            </h3>
+
+            <p><strong>Sân:</strong> ${document.getElementById("bill-ten-san").innerText}</p>
+
+            <p><strong>Ngày:</strong> ${document.getElementById("bill-ngay").innerText}</p>
+
+            <p><strong>Khung giờ:</strong> ${document.getElementById("bill-khung-gio").innerText}</p>
+
+            <p><strong>Thành tiền:</strong> ${document.getElementById("bill-tong-tien").innerText}</p>
+        </div>
+    `;
+});
+
+btnCancel.addEventListener("click", function () {
+    localStorage.setItem("bookingStatus", "cancel");
+    localStorage.setItem("bookingField", document.getElementById("bill-ten-san").innerText);
+    localStorage.setItem("bookingDate", document.getElementById("bill-ngay").innerText);
+    localStorage.setItem("bookingTime", document.getElementById("bill-khung-gio").innerText);
+    localStorage.setItem("bookingPrice", document.getElementById("bill-tong-tien").innerText);
+
+    clearInterval(countdownInterval);
+
+    qrBox.style.display = "none";
+
+    document.querySelector(".status-content").innerHTML = `
+        <div class="booking-card">
+            <h3 style="color:red">
+                <i class="fas fa-times-circle"></i>
+                Đã hủy
+            </h3>
+
+            <p><strong>Sân:</strong> ${document.getElementById("bill-ten-san").innerText}</p>
+
+            <p><strong>Ngày:</strong> ${document.getElementById("bill-ngay").innerText}</p>
+
+            <p><strong>Khung giờ:</strong> ${document.getElementById("bill-khung-gio").innerText}</p>
+
+            <p><strong>Thành tiền:</strong> ${document.getElementById("bill-tong-tien").innerText}</p>
+        </div>
+    `;
+});
+</script>
+<script>
+window.addEventListener("load", function () {
+
+    const status = localStorage.getItem("bookingStatus");
+
+    const field = localStorage.getItem("bookingField");
+    const date = localStorage.getItem("bookingDate");
+    const time = localStorage.getItem("bookingTime");
+    const price = localStorage.getItem("bookingPrice");
+
+    if (status === "success") {
+
+        document.querySelector(".status-content").innerHTML = `
+            <div class="booking-card">
+                <h3 style="color:green">
+                    <i class="fas fa-check-circle"></i>
+                    Đã xác nhận
+                </h3>
+
+                <p><strong>Sân:</strong> ${field}</p>
+                <p><strong>Ngày:</strong> ${date}</p>
+                <p><strong>Khung giờ:</strong> ${time}</p>
+                <p><strong>Thành tiền:</strong> ${price}</p>
+            </div>
+        `;
+    }
+
+    if (status === "cancel") {
+
+        document.querySelector(".status-content").innerHTML = `
+            <div class="booking-card">
+                <h3 style="color:red">
+                    <i class="fas fa-times-circle"></i>
+                    Đã hủy
+                </h3>
+
+                <p><strong>Sân:</strong> ${field}</p>
+                <p><strong>Ngày:</strong> ${date}</p>
+                <p><strong>Khung giờ:</strong> ${time}</p>
+                <p><strong>Thành tiền:</strong> ${price}</p>
+            </div>
+        `;
+    }
+
+});
+
+</script>
 </body>
 
 </html>
