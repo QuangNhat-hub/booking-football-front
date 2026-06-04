@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý đơn đặt sân</title>
+    <link rel="stylesheet" href="../dinhdang/style.css">
+    <style>
+        .booking-card {
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .status {
+            font-weight: bold;
+            padding: 4px 12px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        .status.pending { background: #ffc107; color: #333; }
+        .status.confirmed { background: #28a745; color: white; }
+        .status.cancelled { background: #dc3545; color: white; }
+        .status.completed { background: #17a2b8; color: white; }
+        .status.no_show { background: #6c757d; color: white; }
+        .btn-cancel {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+        .btn-cancel:hover { background-color: #c82333; }
+        .btn-cancel:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        h2 { color: #2c3e50; }
+        #message { color: red; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>📋 Lịch sử đặt sân của tôi</h2>
+        <div id="bookingList"></div>
+        <div id="message"></div>
+    </div>
+    <script src="../hd/Quanlydon.js"></script>
+</body>
+</html>
