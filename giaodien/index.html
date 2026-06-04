@@ -9,6 +9,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
     <link rel="stylesheet" href="../dinhdang/style.css" />
+    <link rel="stylesheet" href="../dinhdang/style2.css">
   </head>
   <header
     style="
@@ -88,18 +89,49 @@
       </div>
 
       <div class="pitch-grid" id="field-list"></div>
-
-      <div class="owner-banner">
-        <div>
-          <h2>Bạn là chủ sân bóng?</h2>
-          <p>Đăng ký để quản lý sân và nhận nhiều ưu đãi hấp dẫn.</p>
-        </div>
-        <button class="btn-register">Đăng ký ngay</button>
-      </div>
     </div>
 
-    <footer class="footer">
-      <p>© 2026 Football Booking. All rights reserved.</p>
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div>
+                <h3><i class="fas fa-futbol"></i> Booking Football</h3>
+                <p>Nền tảng đặt sân bóng đá hàng đầu Việt Nam. Nhanh chóng - Tiện lợi - Uy tín.</p>
+                <div class="social-icons">
+                    <i class="fab fa-facebook-f"></i>
+                    <i class="fab fa-youtube"></i>
+                    <i class="fas fa-globe"></i>
+                </div>
+            </div>
+            <div>
+                <h4>DỊCH VỤ</h4>
+                <ul>
+                    <li>Đặt sân</li>
+                    <li>Tìm sân</li>
+                    <li>Giới thiệu</li>
+                    <li>Tin tức</li>
+                </ul>
+            </div>
+            <div>
+                <h4>HỖ TRỢ</h4>
+                <ul>
+                    <li>Hướng dẫn đặt sân</li>
+                    <li>Câu hỏi thường gặp</li>
+                    <li>Chính sách bảo mật</li>
+                    <li>Điều khoản sử dụng</li>
+                </ul>
+            </div>
+            <div>
+                <h4>LIÊN HỆ</h4>
+                <ul>
+                    <li>Hotline: 1900 1234</li>
+                    <li>Email: support@bookingfootball.vn</li>
+                    <li>Địa chỉ: 123 Nguyễn Trãi, Thanh Xuân, Hà Nội</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Booking Football. All rights reserved.</p>
+        </div>
     </footer>
     <script>
       fetch("http://localhost:8080/api/fields")
@@ -139,5 +171,7 @@
         })
         .catch((error) => console.error("Lỗi API kìa bro:", error));
     </script>
+    <script src="../hd/datsanimage.js"></script>
+    <script src="../hd/continuebuton.js"></script>
   </body>
 </html>
