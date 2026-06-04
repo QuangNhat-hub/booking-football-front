@@ -45,16 +45,17 @@
           vài bước.
         </p>
 
-        <div class="search-box">
+       <div class="search-box">
           <input
             type="text"
+            id="input-name"
             placeholder="Nhập tên sân..."
             class="search-input"
           />
-          <input type="text" placeholder="Vị trí" class="search-input" />
-          <input type="date" class="search-input" />
-          <input type="time" class="search-input" />
-          <button class="btn-search">Tìm sân</button>
+          <input type="text" id="input-address" placeholder="Vị trí" class="search-input" />
+          <input type="date" id="input-date" class="search-input" />
+          <input type="time" id="input-time" class="search-input" />
+          <button id="btn-search" class="btn-search">Tìm sân</button>
         </div>
       </div>
     </div>
@@ -172,6 +173,7 @@
         })
         .catch((error) => console.error("Lỗi API kìa bro:", error));
     </script>
+    <script src="../hd/timkiem.js"></script>
     <script src="../hd/datsanimage.js"></script>
     <script src="../hd/continuebuton.js"></script>
   </body>
