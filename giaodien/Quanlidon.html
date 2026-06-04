@@ -6,6 +6,25 @@
     <title>Quản lý đơn đặt sân</title>
     <link rel="stylesheet" href="../dinhdang/style.css">
     <style>
+        .page-header {
+            background-color: #008940;
+            color: white;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .page-header a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .page-header a:hover {
+            opacity: 0.8;
+        }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
         .booking-card {
             border: 1px solid #ddd;
             border-radius: 12px;
@@ -14,11 +33,16 @@
             background: #fff;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
+        .booking-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: box-shadow 0.3s ease;
+        }
         .status {
             font-weight: bold;
             padding: 4px 12px;
             border-radius: 20px;
             display: inline-block;
+            font-size: 12px;
         }
         .status.pending { background: #ffc107; color: #333; }
         .status.confirmed { background: #28a745; color: white; }
@@ -33,23 +57,49 @@
             border-radius: 6px;
             cursor: pointer;
             margin-top: 8px;
+            font-size: 14px;
+            transition: background-color 0.3s;
         }
         .btn-cancel:hover { background-color: #c82333; }
         .btn-cancel:disabled {
             background-color: #aaa;
             cursor: not-allowed;
         }
-        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
-        h2 { color: #2c3e50; }
-        #message { color: red; margin-top: 10px; }
+        h2 { color: #2c3e50; margin-bottom: 20px; }
+        #message { 
+            color: #d32f2f;
+            margin-top: 10px;
+            padding: 10px;
+            background: #ffebee;
+            border-radius: 4px;
+            display: none;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #888;
+        }
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #008940;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
+    <div class="page-header">
+        <a href="javascript:history.back()">← Quay lại</a>
+        <h1 style="margin: 0; flex: 1;">Quản lý đặt sân</h1>
+    </div>
+    
     <div class="container">
         <h2>📋 Lịch sử đặt sân của tôi</h2>
+        <div id="loading" class="loading" style="display: none;">Đang tải dữ liệu...</div>
         <div id="bookingList"></div>
         <div id="message"></div>
     </div>
+
     <script src="../hd/Quanlydon.js"></script>
 </body>
 </html>
