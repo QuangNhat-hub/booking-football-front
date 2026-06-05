@@ -292,14 +292,19 @@ btnSuccess.addEventListener("click", function () {
     localStorage.setItem("bookingDate", document.getElementById("bill-ngay").innerText);
     localStorage.setItem("bookingTime", document.getElementById("bill-khung-gio").innerText);
     localStorage.setItem("bookingPrice", document.getElementById("bill-tong-tien").innerText);
+    console.log("bookingId =", localStorage.getItem("bookingId"));
     fetch("http://localhost:8080/api/payments", {
     method: "POST",
     headers: {
         "Content-Type": "application/json"
     },
     body: JSON.stringify({
+        
         bookingId: Number(localStorage.getItem("bookingId")),
-        paymentMethod: "Ví MoMo",
+        paymentMethod: document.querySelector('input[name="payment"]:checked')
+    .closest(".method-option")
+    .querySelector("strong")
+    .innerText,
         paymentAmount: Number(
             localStorage.getItem("bookingPrice").replace(/\D/g, "")
         ),
@@ -313,6 +318,9 @@ btnSuccess.addEventListener("click", function () {
     return res.json();
 })
 .then(data => {
+    fetch(`http://localhost:8080/api/bookings/${localStorage.getItem("bookingId")}/confirm`, {
+    method: "PUT"
+});
     console.log("Đã lưu payment:", data);
     alert("Thanh toán đã được lưu vào database");
 })
