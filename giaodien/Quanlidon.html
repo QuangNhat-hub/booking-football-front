@@ -332,11 +332,11 @@
         <h2>📋 Lịch sử đặt sân của tôi</h2>
         
         <div class="filter-section" id="filterSection">
-            <button class="filter-btn active" onclick="filterBookings('all')">Tất cả</button>
-            <button class="filter-btn" onclick="filterBookings('pending')">Chờ duyệt</button>
-            <button class="filter-btn" onclick="filterBookings('confirmed')">Đã xác nhận</button>
-            <button class="filter-btn" onclick="filterBookings('completed')">Hoàn thành</button>
-            <button class="filter-btn" onclick="filterBookings('cancelled')">Đã hủy</button>
+            <button class="filter-btn active" data-status="all" onclick="filterBookings('all')">Tất cả</button>
+            <button class="filter-btn" data-status="pending" onclick="filterBookings('pending')">Chờ duyệt</button>
+            <button class="filter-btn" data-status="confirmed" onclick="filterBookings('confirmed')">Đã xác nhận</button>
+            <button class="filter-btn" data-status="completed" onclick="filterBookings('completed')">Hoàn thành</button>
+            <button class="filter-btn" data-status="cancelled" onclick="filterBookings('cancelled')">Đã hủy</button>
         </div>
 
         <div id="loading" class="loading">
@@ -360,23 +360,17 @@
         // Helper functions
         function filterBookings(status) {
             const filterBtns = document.querySelectorAll('.filter-btn');
+            
+            // Xóa active class từ tất cả nút
             filterBtns.forEach(btn => btn.classList.remove('active'));
             
-            // FIX: Tìm nút được click và đánh dấu active
-            const activeBtn = Array.from(filterBtns).find(btn => 
-                btn.textContent.includes(
-                    status === 'all' ? 'Tất cả' :
-                    status === 'pending' ? 'Chờ duyệt' :
-                    status === 'confirmed' ? 'Đã xác nhận' :
-                    status === 'completed' ? 'Hoàn thành' :
-                    status === 'cancelled' ? 'Đã hủy' : ''
-                )
-            );
+            // Thêm active class cho nút có data-status khớp
+            const activeBtn = document.querySelector(`[data-status="${status}"]`);
             if (activeBtn) {
                 activeBtn.classList.add('active');
             }
             
-            // Trigger filter event if you have a custom filter function
+            // Gọi hàm filter từ file Quanlydon.js
             if (typeof onFilterBookings === 'function') {
                 onFilterBookings(status);
             }
