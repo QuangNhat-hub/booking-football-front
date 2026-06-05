@@ -359,20 +359,23 @@
     <script>
         // Helper functions
         function filterBookings(status) {
-            const filterBtns = document.querySelectorAll('.filter-btn');
-            
             // Xóa active class từ tất cả nút
+            const filterBtns = document.querySelectorAll('.filter-btn');
             filterBtns.forEach(btn => btn.classList.remove('active'));
             
             // Thêm active class cho nút có data-status khớp
             const activeBtn = document.querySelector(`[data-status="${status}"]`);
             if (activeBtn) {
                 activeBtn.classList.add('active');
+            } else {
+                console.warn(`Không tìm thấy nút filter với data-status="${status}"`);
             }
             
             // Gọi hàm filter từ file Quanlydon.js
             if (typeof onFilterBookings === 'function') {
                 onFilterBookings(status);
+            } else {
+                console.error('Hàm onFilterBookings không được định nghĩa');
             }
         }
 
