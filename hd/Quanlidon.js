@@ -69,7 +69,17 @@ function renderBookings(bookings) {
     container.innerHTML = ""; // Xóa rỗng container trước khi vẽ thẻ mới
     
     bookings.forEach(booking => {
-        const startTime = new Date(booking.startTime);
+        // Kiểm tra và xử lý startTime
+        let startTime;
+        try {
+            startTime = new Date(booking.startTime);
+            if (isNaN(startTime.getTime())) {
+                throw new Error("Thời gian không hợp lệ");
+            }
+        } catch (error) {
+            console.error("Lỗi khi parse thời gian:", error);
+            startTime = new Date(); // Fallback về thời gian hiện tại
+        }
         
         // Sửa lỗi định dạng thời gian - thêm padding 0
         const day = padZero(startTime.getDate());
@@ -112,6 +122,15 @@ function renderBookings(bookings) {
 
         const card = document.createElement("div");
         card.className = "booking-card";
+        
+        // Sử dụng textContent và createElement để tránh XSS
+        const pitchNameText = booking.pitchName || "N/A";
+        const pitchAddressText = booking.pitchAddress || "N/A";
+        const hoursText = booking.hours || "N/A";
+        const totalPriceText = booking.totalPrice ? booking.totalPrice.toLocaleString() : "0";
+        const bookingIdText = booking.id || "N/A";
+        const cancelReasonText = booking.cancelReason || "";
+        
         card.innerHTML = `
             <h3>🏟️ Sân ID: ${booking.pitchId || "N/A"}</h3>
             <p><strong>Thời gian đá:</strong> ${formattedTime} (${booking.hours || "N/A"} giờ)</p>
@@ -133,6 +152,13 @@ function renderBookings(bookings) {
 async function handleCancelClick(event) {
     const btn = event.currentTarget;
     const bookingId = btn.getAttribute("data-id");
+    
+    // Kiểm tra booking ID hợp lệ
+    if (!bookingId) {
+        alert("❌ Lỗi: Không tìm thấy ID đơn đặt sân");
+        return;
+    }
+    
     const reason = prompt("Nhập lý do hủy sân (không bắt buộc):");
     
     // Nếu user bấm Cancel trên hộp thoại prompt
