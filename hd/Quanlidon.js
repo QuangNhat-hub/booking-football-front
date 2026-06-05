@@ -5,25 +5,34 @@ function padZero(num) {
     return num.toString().padStart(2, '0');
 }
 
-// Kiểm tra đăng nhập
-let currentUser = localStorage.getItem("user");
+// ==========================================
+// KIỂM TRA ĐĂNG NHẬP & LẤY ID KHÁCH HÀNG
+// ==========================================
+let currentUser = localStorage.getItem("currentUser");
+let userId = null;
+
 if (!currentUser) {
     alert("Vui lòng đăng nhập để xem lịch sử đặt sân");
     window.location.href = "dangnhap.html";
+} else {
+    try {
+        let user = JSON.parse(currentUser);
+        // Linh hoạt lấy id hoặc userId từ localStorage
+        userId = user.id || user.userId; 
+        
+        if (!userId) {
+            throw new Error("Không tìm thấy ID người dùng");
+        }
+    } catch (error) {
+        alert("Lỗi: Dữ liệu đăng nhập không hợp lệ. Vui lòng đăng nhập lại.");
+        localStorage.removeItem("currentUser");
+        window.location.href = "dangnhap.html";
+    }
 }
 
-let user;
-try {
-    user = JSON.parse(currentUser);
-    if (!user || !user.id) throw new Error("Dữ liệu người dùng không hợp lệ");
-} catch (error) {
-    alert("Lỗi: Dữ liệu đăng nhập không hợp lệ. Vui lòng đăng nhập lại.");
-    localStorage.removeItem("user");
-    window.location.href = "dangnhap.html";
-}
-
-const userId = user.id;
-
+// ==========================================
+// CÁC HÀM XỬ LÝ CHÍNH
+// ==========================================
 async function loadBookings() {
     try {
         const response = await fetch(`${API_BASE}/user/${userId}`);
@@ -34,6 +43,7 @@ async function loadBookings() {
         const messageEl = document.getElementById("message");
         if (messageEl) {
             messageEl.innerText = "Không thể kết nối đến máy chủ. Vui lòng thử lại sau.";
+            messageEl.style.display = "block";
         }
         console.error(error);
     }
@@ -41,17 +51,22 @@ async function loadBookings() {
 
 function renderBookings(bookings) {
     const container = document.getElementById("bookingList");
+    const loadingEl = document.getElementById("loading");
+    
+    // Ẩn dòng chữ "Đang tải dữ liệu..."
+    if (loadingEl) loadingEl.style.display = "none";
+
     if (!container) {
         console.error("Phần tử bookingList không tồn tại!");
         return;
     }
 
     if (!bookings || !bookings.length) {
-        container.innerHTML = "<p>Bạn chưa có đơn đặt sân nào.</p>";
+        container.innerHTML = "<p style='text-align:center; width:100%; color:#666;'>Bạn chưa có đơn đặt sân nào.</p>";
         return;
     }
 
-    container.innerHTML = "";
+    container.innerHTML = ""; // Xóa rỗng container trước khi vẽ thẻ mới
     
     bookings.forEach(booking => {
         const startTime = new Date(booking.startTime);
@@ -65,35 +80,51 @@ function renderBookings(bookings) {
         const formattedTime = `${day}/${month}/${year} ${hours}:${minutes}`;
         
         let statusClass = "";
+        let statusText = booking.status;
         switch (booking.status) {
-            case "pending": statusClass = "pending"; break;
-            case "confirmed": statusClass = "confirmed"; break;
-            case "cancelled": statusClass = "cancelled"; break;
-            case "completed": statusClass = "completed"; break;
-            case "no_show": statusClass = "no_show"; break;
+            case "pending": 
+                statusClass = "pending"; 
+                statusText = "Đang chờ duyệt";
+                break;
+            case "confirmed": 
+                statusClass = "confirmed"; 
+                statusText = "Đã chốt sân";
+                break;
+            case "cancelled": 
+                statusClass = "cancelled"; 
+                statusText = "Đã hủy";
+                break;
+            case "completed": 
+                statusClass = "completed"; 
+                statusText = "Đã hoàn thành";
+                break;
+            case "no_show": 
+                statusClass = "no_show"; 
+                statusText = "Khách không đến";
+                break;
             default: statusClass = "unknown";
         }
         
         const now = new Date();
         const hoursDiff = (startTime - now) / (1000 * 3600);
+        // Chỉ cho phép hủy nếu đơn chưa đá và còn cách giờ đá >= 24 tiếng
         const canCancel = (booking.status === "pending" || booking.status === "confirmed") && hoursDiff >= 24;
 
         const card = document.createElement("div");
         card.className = "booking-card";
         card.innerHTML = `
-            <h3>🏟️ ${booking.pitchName || "N/A"}</h3>
-            <p><strong>Địa chỉ:</strong> ${booking.pitchAddress || "N/A"}</p>
-            <p><strong>Thời gian bắt đầu:</strong> ${formattedTime} (${booking.hours || "N/A"} giờ)</p>
-            <p><strong>Tổng tiền:</strong> ${booking.totalPrice ? booking.totalPrice.toLocaleString() : "0"} VNĐ</p>
-            <p><strong>Trạng thái:</strong> <span class="status ${statusClass}">${booking.status}</span></p>
+            <h3>🏟️ Sân ID: ${booking.pitchId || "N/A"}</h3>
+            <p><strong>Thời gian đá:</strong> ${formattedTime} (${booking.hours || "N/A"} giờ)</p>
+            <p><strong>Tổng tiền:</strong> <span style="color:#dc3545; font-weight:bold;">${booking.totalPrice ? booking.totalPrice.toLocaleString() : "0"} VNĐ</span></p>
+            <p><strong>Trạng thái:</strong> <span class="status ${statusClass}">${statusText}</span></p>
             ${booking.cancelReason ? `<p><strong>Lý do hủy:</strong> ${booking.cancelReason}</p>` : ""}
-            <p style="font-size:12px; color:gray;">Mã đơn: ${booking.id}</p>
+            <p style="font-size:12px; color:gray; margin-top:15px;">Mã đơn: #${booking.id}</p>
             ${canCancel ? `<button class="btn-cancel" data-id="${booking.id}">❌ Hủy đơn</button>` : ""}
         `;
         container.appendChild(card);
     });
 
-    // Gắn event listeners cho các nút hủy (chỉ một lần)
+    // Gắn sự kiện click cho các nút hủy
     document.querySelectorAll(".btn-cancel").forEach(btn => {
         btn.addEventListener("click", handleCancelClick);
     });
@@ -104,7 +135,7 @@ async function handleCancelClick(event) {
     const bookingId = btn.getAttribute("data-id");
     const reason = prompt("Nhập lý do hủy sân (không bắt buộc):");
     
-    // Nếu user nhấn Cancel hoặc không nhập gì
+    // Nếu user bấm Cancel trên hộp thoại prompt
     if (reason === null) return;
     
     await cancelBooking(bookingId, reason || "Không có lý do");
@@ -120,7 +151,7 @@ async function cancelBooking(bookingId, reason) {
         
         if (response.ok) {
             alert("✅ Hủy đơn thành công!");
-            loadBookings();
+            loadBookings(); // Tải lại danh sách để cập nhật giao diện
         } else {
             const errorText = await response.text();
             alert(`❌ Hủy thất bại: ${errorText}`);
@@ -131,4 +162,7 @@ async function cancelBooking(bookingId, reason) {
     }
 }
 
-document.addEventListener("DOMContentLoaded", loadBookings);
+// Khởi chạy khi load xong trang (Chỉ chạy nếu có ID)
+if (userId) {
+    document.addEventListener("DOMContentLoaded", loadBookings);
+}

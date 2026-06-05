@@ -24,19 +24,29 @@
         .page-header a:hover {
             opacity: 0.8;
         }
-        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+        
+        /* Thêm CSS dạng lưới để xếp các thẻ Card đẹp mắt */
+        .booking-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
         .booking-card {
             border: 1px solid #ddd;
             border-radius: 12px;
             padding: 16px;
-            margin-bottom: 20px;
             background: #fff;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-top: 4px solid #008940;
         }
         .booking-card:hover {
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             transition: box-shadow 0.3s ease;
         }
+        .booking-card h3 { margin-top: 0; color: #333; border-bottom: 1px solid #eee; padding-bottom: 10px;}
         .status {
             font-weight: bold;
             padding: 4px 12px;
@@ -50,22 +60,26 @@
         .status.completed { background: #17a2b8; color: white; }
         .status.no_show { background: #6c757d; color: white; }
         .btn-cancel {
-            background-color: #dc3545;
-            color: white;
-            border: none;
+            background-color: #fff;
+            color: #dc3545;
+            border: 1px solid #dc3545;
             padding: 8px 16px;
             border-radius: 6px;
             cursor: pointer;
-            margin-top: 8px;
+            margin-top: 15px;
             font-size: 14px;
-            transition: background-color 0.3s;
+            font-weight: bold;
+            width: 100%;
+            transition: all 0.3s;
         }
-        .btn-cancel:hover { background-color: #c82333; }
+        .btn-cancel:hover { background-color: #dc3545; color: white; }
         .btn-cancel:disabled {
             background-color: #aaa;
             cursor: not-allowed;
+            border: none;
+            color: white;
         }
-        h2 { color: #2c3e50; margin-bottom: 20px; }
+        h2 { color: #2c3e50; margin-bottom: 10px; text-align: center; }
         #message { 
             color: #d32f2f;
             margin-top: 10px;
@@ -73,11 +87,8 @@
             background: #ffebee;
             border-radius: 4px;
             display: none;
-        }
-        .empty-state {
             text-align: center;
-            padding: 40px;
-            color: #888;
+            font-weight: bold;
         }
         .loading {
             text-align: center;
@@ -90,16 +101,19 @@
 <body>
     <div class="page-header">
         <a href="javascript:history.back()">← Quay lại</a>
-        <h1 style="margin: 0; flex: 1;">Quản lý đặt sân</h1>
+        <h1 style="margin: 0; flex: 1; text-align: center;">Quản lý đặt sân</h1>
     </div>
     
     <div class="container">
-        <h2>📋 Lịch sử đặt sân của tôi</h2>
-        <div id="loading" class="loading" style="display: none;">Đang tải dữ liệu...</div>
-        <div id="bookingList"></div>
+        <h2>Lịch sử đặt sân của tôi</h2>
         <div id="message"></div>
+        <div id="loading" class="loading" style="display: none;">Đang tải dữ liệu...</div>
+        
+        <div id="bookingList" class="booking-container">
+            <p style="text-align: center; width: 100%; color: #666;">Đang kết nối để tải dữ liệu...</p>
+        </div>
     </div>
 
-    <script src="../hd/Quanlydon.js"></script>
+    <script src="../hd/Quanlidon.js"></script>
 </body>
 </html>
