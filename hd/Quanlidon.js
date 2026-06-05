@@ -5,6 +5,16 @@ function padZero(num) {
     return num.toString().padStart(2, '0');
 }
 
+// Helper function: An toàn parse JSON
+function safeJsonParse(jsonString, fallback = null) {
+    try {
+        return JSON.parse(jsonString);
+    } catch (error) {
+        console.error("JSON parse error:", error);
+        return fallback;
+    }
+}
+
 // Kiểm tra đăng nhập
 let currentUser = localStorage.getItem("user");
 if (!currentUser) {
@@ -12,11 +22,10 @@ if (!currentUser) {
     window.location.href = "dangnhap.html";
 }
 
-let user;
-try {
-    user = JSON.parse(currentUser);
-    if (!user || !user.id) throw new Error("Dữ liệu người dùng không hợp lệ");
-} catch (error) {
+let user = safeJsonParse(currentUser);
+
+// Kiểm tra user hợp lệ
+if (!user || !user.id) {
     alert("Lỗi: Dữ liệu đăng nhập không hợp lệ. Vui lòng đăng nhập lại.");
     localStorage.removeItem("user");
     window.location.href = "dangnhap.html";
@@ -54,7 +63,17 @@ function renderBookings(bookings) {
     container.innerHTML = "";
     
     bookings.forEach(booking => {
-        const startTime = new Date(booking.startTime);
+        // Kiểm tra và xử lý startTime
+        let startTime;
+        try {
+            startTime = new Date(booking.startTime);
+            if (isNaN(startTime.getTime())) {
+                throw new Error("Thời gian không hợp lệ");
+            }
+        } catch (error) {
+            console.error("Lỗi khi parse thời gian:", error);
+            startTime = new Date(); // Fallback về thời gian hiện tại
+        }
         
         // Sửa lỗi định dạng thời gian - thêm padding 0
         const day = padZero(startTime.getDate());
@@ -80,15 +99,24 @@ function renderBookings(bookings) {
 
         const card = document.createElement("div");
         card.className = "booking-card";
+        
+        // Sử dụng textContent và createElement để tránh XSS
+        const pitchNameText = booking.pitchName || "N/A";
+        const pitchAddressText = booking.pitchAddress || "N/A";
+        const hoursText = booking.hours || "N/A";
+        const totalPriceText = booking.totalPrice ? booking.totalPrice.toLocaleString() : "0";
+        const bookingIdText = booking.id || "N/A";
+        const cancelReasonText = booking.cancelReason || "";
+        
         card.innerHTML = `
-            <h3>🏟️ ${booking.pitchName || "N/A"}</h3>
-            <p><strong>Địa chỉ:</strong> ${booking.pitchAddress || "N/A"}</p>
-            <p><strong>Thời gian bắt đầu:</strong> ${formattedTime} (${booking.hours || "N/A"} giờ)</p>
-            <p><strong>Tổng tiền:</strong> ${booking.totalPrice ? booking.totalPrice.toLocaleString() : "0"} VNĐ</p>
+            <h3>🏟️ ${pitchNameText}</h3>
+            <p><strong>Địa chỉ:</strong> ${pitchAddressText}</p>
+            <p><strong>Thời gian bắt đầu:</strong> ${formattedTime} (${hoursText} giờ)</p>
+            <p><strong>Tổng tiền:</strong> ${totalPriceText} VNĐ</p>
             <p><strong>Trạng thái:</strong> <span class="status ${statusClass}">${booking.status}</span></p>
-            ${booking.cancelReason ? `<p><strong>Lý do hủy:</strong> ${booking.cancelReason}</p>` : ""}
-            <p style="font-size:12px; color:gray;">Mã đơn: ${booking.id}</p>
-            ${canCancel ? `<button class="btn-cancel" data-id="${booking.id}">❌ Hủy đơn</button>` : ""}
+            ${cancelReasonText ? `<p><strong>Lý do hủy:</strong> ${cancelReasonText}</p>` : ""}
+            <p style="font-size:12px; color:gray;">Mã đơn: ${bookingIdText}</p>
+            ${canCancel ? `<button class="btn-cancel" data-id="${bookingIdText}">❌ Hủy đơn</button>` : ""}
         `;
         container.appendChild(card);
     });
@@ -102,6 +130,13 @@ function renderBookings(bookings) {
 async function handleCancelClick(event) {
     const btn = event.currentTarget;
     const bookingId = btn.getAttribute("data-id");
+    
+    // Kiểm tra booking ID hợp lệ
+    if (!bookingId) {
+        alert("❌ Lỗi: Không tìm thấy ID đơn đặt sân");
+        return;
+    }
+    
     const reason = prompt("Nhập lý do hủy sân (không bắt buộc):");
     
     // Nếu user nhấn Cancel hoặc không nhập gì
