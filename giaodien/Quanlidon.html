@@ -361,8 +361,19 @@
         function filterBookings(status) {
             const filterBtns = document.querySelectorAll('.filter-btn');
             filterBtns.forEach(btn => btn.classList.remove('active'));
-            if (event && event.target) {
-                event.target.classList.add('active');
+            
+            // FIX: Tìm nút được click và đánh dấu active
+            const activeBtn = Array.from(filterBtns).find(btn => 
+                btn.textContent.includes(
+                    status === 'all' ? 'Tất cả' :
+                    status === 'pending' ? 'Chờ duyệt' :
+                    status === 'confirmed' ? 'Đã xác nhận' :
+                    status === 'completed' ? 'Hoàn thành' :
+                    status === 'cancelled' ? 'Đã hủy' : ''
+                )
+            );
+            if (activeBtn) {
+                activeBtn.classList.add('active');
             }
             
             // Trigger filter event if you have a custom filter function
