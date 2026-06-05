@@ -25,10 +25,10 @@
                 <li><a href="#">Tin tức</a></li>
                 <li><a href="#">Liên hệ</a></li>
             </ul>
-            <div class="auth-btns">
-                <button class="btn-outline">Đăng nhập</button>
-                <button class="btn-solid">Đăng ký</button>
-            </div>
+            <div class="auth-btns" id="auth-buttons">
+    <button class="btn-outline">Đăng nhập</button>
+    <button class="btn-solid">Đăng ký</button>
+</div>
         </div>
     </header>
 
@@ -135,10 +135,20 @@
                 </div>
 
                 <div class="status-content">
-                    <p>Hiện tại bạn chưa có đơn hàng nào.</p>
+                    <div class="booking-card">
+    <h3 style="color:#f39c12">
+        <i class="fas fa-clock"></i>
+        Chờ thanh toán
+    </h3>
+
+    <p>
+        Sau khi thanh toán thành công,
+        trạng thái đơn sẽ được cập nhật tại đây.
+    </p>
+</div>
                 
             </div>
-
+            </div>
         </div>
     </div>
 
@@ -183,7 +193,9 @@
         <div class="footer-bottom">
             <p>© 2026 Booking Football. All rights reserved.</p>
         </div>
-    </footer>
+
+    </footer class ="site-footer">
+
 
     <script>
         // 1. Xử lý click chọn Phương thức thanh toán
@@ -210,7 +222,6 @@
             });
         });
     </script>
-    <script src="../hd/aftercontinue.js"></script>
 
 
 
@@ -281,7 +292,34 @@ btnSuccess.addEventListener("click", function () {
     localStorage.setItem("bookingDate", document.getElementById("bill-ngay").innerText);
     localStorage.setItem("bookingTime", document.getElementById("bill-khung-gio").innerText);
     localStorage.setItem("bookingPrice", document.getElementById("bill-tong-tien").innerText);
-    
+    fetch("http://localhost:8080/api/payments", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        bookingId: Number(localStorage.getItem("bookingId")),
+        paymentMethod: "Ví MoMo",
+        paymentAmount: Number(
+            localStorage.getItem("bookingPrice").replace(/\D/g, "")
+        ),
+        paymentStatus: "Thành công"
+    })
+})
+.then(res => {
+    if (!res.ok) {
+        throw new Error("Lưu thanh toán thất bại");
+    }
+    return res.json();
+})
+.then(data => {
+    console.log("Đã lưu payment:", data);
+    alert("Thanh toán đã được lưu vào database");
+})
+.catch(err => {
+    console.error("Lỗi lưu payment:", err);
+    alert(err.message);
+});
     
     
     
@@ -382,6 +420,63 @@ window.addEventListener("load", function () {
 
 });
 
+</script>
+<script>
+window.addEventListener("load", function () {
+
+    document.getElementById("bill-ten-san").innerText =
+        localStorage.getItem("bookingField")  || "Chưa có dữ liệu";
+
+    document.getElementById("bill-ngay").innerText =
+        localStorage.getItem("bookingDate")  || "Chưa có dữ liệu";
+
+    document.getElementById("bill-khung-gio").innerText =
+        localStorage.getItem("bookingTime")  || "Chưa có dữ liệu";
+
+    document.getElementById("bill-tong-tien").innerText =
+        localStorage.getItem("bookingPrice")  || "0đ";
+
+    document.getElementById("bill-tong-tien-button").innerText =
+        localStorage.getItem("bookingPrice")  || "0đ";
+
+});
+</script>
+
+<script>
+window.addEventListener("load", function () {
+    const authButtons = document.getElementById("auth-buttons");
+
+    const isLogin = localStorage.getItem("isLogin");
+    const fullName = localStorage.getItem("fullName") || "User";
+
+    if (isLogin === "true") {
+        authButtons.innerHTML = `
+            <span style="
+                font-weight:bold;
+                color:#008940;
+                margin-right:15px;
+            ">
+                Xin chào ${fullName}
+            </span>
+
+            <a href="Quanlidon.html">
+                <button class="btn-solid" style="background:#17a2b8">
+                    Lịch sử đặt sân
+                </button>
+            </a>
+
+            <button onclick="logout()" class="btn-outline">
+                Đăng xuất
+            </button>
+        `;
+    }
+});
+
+function logout() {
+    localStorage.removeItem("isLogin");
+    localStorage.removeItem("fullName");
+    window.location.href = "dangnhap.html";
+}
 </script>
 </body>
 

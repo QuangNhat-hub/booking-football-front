@@ -27,14 +27,17 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
             // Lưu thông tin vào bộ nhớ tạm
             localStorage.setItem('currentUser', JSON.stringify(result));
             alert('Đăng nhập thành công!');
-            
+            localStorage.setItem("userId", result.userId);
+            localStorage.setItem("fullName", result.fullName);
+            localStorage.setItem("phone", result.phone);
+            localStorage.setItem("isLogin", "true");
             // BẮT ĐẦU BẺ NHÁNH DỰA VÀO ROLE_ID:
             if (result.roleId === 1) { 
                 // Nếu là Admin -> Chuyển hướng sang trang Quản trị
                 window.location.href = 'admin_index.html'; 
             } else {
                 // Nếu là User (roleId === 2) -> Chuyển hướng sang trang chủ Đặt sân
-                window.location.href = 'index2.html'; 
+                window.location.href = 'index.html'; 
             }
             
         } else {
@@ -46,4 +49,4 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         console.error('Lỗi kết nối API:', error);
         alert('Không thể kết nối đến máy chủ Backend!');
     });
-});
+}); 

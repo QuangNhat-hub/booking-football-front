@@ -27,10 +27,9 @@
       </h2>
     </div>
 
-    <div class="auth-buttons">
+    <div class="auth-buttons" id="auth-buttons">
       <a href="dangnhap.html" class="btn-login">Đăng nhập</a>
       <a href="dangky.html" class="btn-register">Đăng ký</a>
-      <a href="Quanlidon.html" class="btn-register" style= "background-color:#17a2b8;">Lich su dat san </a>
       <!-- Da thay doi -->
     </div>
   </header>
@@ -141,9 +140,11 @@ fetch("http://localhost:8080/api/fields")
           container.innerHTML = "";
 
           data.forEach((field) => {
-            const linkAnh = field.images && field.images.length > 0
-                ? field.images[0].imageUrl
-                : "../hinhanh/images (1).jpg";
+    console.log("FIELD:", field);
+
+    const linkAnh = field.images && field.images.length > 0
+        ? field.images[0].imageUrl
+        : "../hinhanh/images (1).jpg";
             
             // 1. Đọc trạng thái từ Database
             const isMaintenance = field.status === false;
@@ -155,7 +156,7 @@ fetch("http://localhost:8080/api/fields")
                 : '';
             
             // 3. Xử lý logic Click: Nếu bảo trì thì chặn click và báo lỗi, nếu không thì vào datsan.html
-            const targetLink = isMaintenance ? 'javascript:void(0)' : `../giaodien/datsan.html?id=${field.fieldId}`;
+            const targetLink = isMaintenance ? 'javascript:void(0)' : `../giaodien/datsan.html?id=${field.id}`;
             const clickEvent = isMaintenance ? `onclick="alert('Sân bóng này hiện đang được bảo trì. Vui lòng chọn sân khác!');"` : '';
 
             // 4. Đúc HTML
@@ -186,6 +187,38 @@ fetch("http://localhost:8080/api/fields")
     </script>
     <script src="../hd/timkiem.js"></script>
     <script src="../hd/datsanimage.js"></script>
-    <script src="../hd/continuebuton.js"></script>
+    
+
+
+    <script>
+  const authButtons = document.getElementById("auth-buttons");
+  const isLogin = localStorage.getItem("isLogin");
+  const fullName = localStorage.getItem("fullName");
+
+  if (isLogin === "true") {
+    authButtons.innerHTML = `
+      <span style="font-weight:bold;color:#008940;">
+        Xin chào, ${fullName || "người dùng"}
+      </span>
+
+      <a href="Quanlidon.html" class="btn-register" style="background-color:#17a2b8;">
+        Lịch sử đặt sân
+      </a>
+
+      <button onclick="logout()" class="btn-login">
+        Đăng xuất
+      </button>
+    `;
+  }
+
+  function logout() {
+    localStorage.removeItem("userId");
+    localStorage.removeItem("fullName");
+    localStorage.removeItem("phone");
+    localStorage.removeItem("isLogin");
+
+    window.location.href = "dangnhap.html";
+  }
+</script>
   </body>
 </html>

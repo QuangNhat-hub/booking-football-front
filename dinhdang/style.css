@@ -266,3 +266,26 @@ body {
     background-color: #008f45;
     border-color: #008f45;
 }
+
+body {
+    margin: 0;
+}
+
+.site-footer {
+    width: 100%;
+    background: #06401f;
+    color: white;
+    margin-top: 40px;
+}
+
+.footer-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 45px 20px;
+}
+
+.footer-bottom {
+    background: #033316;
+    text-align: center;
+    padding: 15px;
+}
