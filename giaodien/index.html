@@ -1,16 +1,19 @@
 <!doctype html>
 <html lang="vi">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Trang Chủ - Đặt Sân Bóng</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    />
-    <link rel="stylesheet" href="../dinhdang/style.css" />
-    <link rel="stylesheet" href="../dinhdang/style2.css">
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trang Chủ - Đặt Sân Bóng</title>
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+  <link rel="stylesheet" href="../dinhdang/style.css" />
+  <link rel="stylesheet" href="../dinhdang/style2.css" />
+</head>
+
+<body>
   <header
     style="
       display: flex;
@@ -27,198 +30,204 @@
       </h2>
     </div>
 
-    <div class="auth-buttons" id="auth-buttons">
-      <a href="dangnhap.html" class="btn-login">Đăng nhập</a>
+    <div class="auth-buttons" id="authButtons">
+      <a href="dangnhap.html" id="loginBtn" class="btn-login">Đăng nhập</a>
       <a href="dangky.html" class="btn-register">Đăng ký</a>
-      <!-- Da thay doi -->
+    </div>
+
+    <div class="avatar-box" id="avatarBox">
+      <img
+        src="../hinhanh/avatar.jpg"
+        class="avatar-img"
+        id="avatarImg"
+        alt="Avatar"
+      />
+
+      <div class="avatar-menu" id="avatarMenu">
+        <a href="Quanlidon.html" class="btn-register">Lịch sử đặt sân</a>
+        <a href="#" id="logoutBtn">Đăng xuất</a>
+      </div>
     </div>
   </header>
-  <body>
-    <div class="hero-section">
-      <div class="container hero-content">
-        <h1 class="hero-title">
-          Đặt lịch sân bóng nhanh<br />chóng và tiện lợi
-        </h1>
-        <p class="hero-subtitle">
-          Tìm kiếm, xem thông tin sân, chọn khung giờ và đặt sân dễ dàng chỉ với
-          vài bước.
+
+  <div class="hero-section">
+    <div class="container hero-content">
+      <h1 class="hero-title">
+        Đặt lịch sân bóng nhanh<br />chóng và tiện lợi
+      </h1>
+      <p class="hero-subtitle">
+        Tìm kiếm, xem thông tin sân, chọn khung giờ và đặt sân dễ dàng chỉ với
+        vài bước.
+      </p>
+
+      <div class="search-box">
+        <input
+          type="text"
+          id="input-name"
+          placeholder="Nhập tên sân..."
+          class="search-input"
+        />
+        <input
+          type="text"
+          id="input-address"
+          placeholder="Vị trí"
+          class="search-input"
+        />
+        <button id="btn-search" class="btn-search">Tìm sân</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="features-row">
+      <div class="feature-box">
+        <div class="feature-icon"><i class="fas fa-search"></i></div>
+        <div>
+          <strong>Nhiều lựa chọn</strong>
+          <p>Hơn 100+ sân bóng chất lượng</p>
+        </div>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+        <div>
+          <strong>Đặt sân nhanh</strong>
+          <p>Chỉ 3 bước đơn giản</p>
+        </div>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+        <div>
+          <strong>Thanh toán an toàn</strong>
+          <p>Đa dạng phương thức</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-header">
+      <h2>Sân bóng nổi bật</h2>
+      <a href="#" class="view-all">Xem tất cả ></a>
+    </div>
+
+    <div class="pitch-grid" id="field-list"></div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h3><i class="fas fa-futbol"></i> Booking Football</h3>
+        <p>
+          Nền tảng đặt sân bóng đá hàng đầu Việt Nam. Nhanh chóng - Tiện lợi -
+          Uy tín.
         </p>
-
-       <div class="search-box">
-          <input
-            type="text"
-            id="input-name"
-            placeholder="Nhập tên sân..."
-            class="search-input"
-          />
-          <input type="text" id="input-address" placeholder="Vị trí" class="search-input" />
-          <button id="btn-search" class="btn-search">Tìm sân</button>
+        <div class="social-icons">
+          <i class="fab fa-facebook-f"></i>
+          <i class="fab fa-youtube"></i>
+          <i class="fas fa-globe"></i>
         </div>
+      </div>
+
+      <div>
+        <h4>DỊCH VỤ</h4>
+        <ul>
+          <li>Đặt sân</li>
+          <li>Tìm sân</li>
+          <li>Giới thiệu</li>
+          <li>Tin tức</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>HỖ TRỢ</h4>
+        <ul>
+          <li>Hướng dẫn đặt sân</li>
+          <li>Câu hỏi thường gặp</li>
+          <li>Chính sách bảo mật</li>
+          <li>Điều khoản sử dụng</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>LIÊN HỆ</h4>
+        <ul>
+          <li>Hotline: 1900 1234</li>
+          <li>Email: support@bookingfootball.vn</li>
+          <li>Địa chỉ: 123 Nguyễn Trãi, Thanh Xuân, Hà Nội</li>
+        </ul>
       </div>
     </div>
 
-    <div class="container">
-      <div class="features-row">
-        <div class="feature-box">
-          <div class="feature-icon"><i class="fas fa-search"></i></div>
-          <div>
-            <strong>Nhiều lựa chọn</strong>
-            <p>Hơn 100+ sân bóng chất lượng</p>
-          </div>
-        </div>
-        <div class="feature-box">
-          <div class="feature-icon"><i class="fas fa-bolt"></i></div>
-          <div>
-            <strong>Đặt sân nhanh</strong>
-            <p>Chỉ 3 bước đơn giản</p>
-          </div>
-        </div>
-        <div class="feature-box">
-          <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
-          <div>
-            <strong>Thanh toán an toàn</strong>
-            <p>Đa dạng phương thức</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="section-header">
-        <h2>Sân bóng nổi bật</h2>
-        <a href="#" class="view-all">Xem tất cả ></a>
-      </div>
-
-      <div class="pitch-grid" id="field-list"></div>
+    <div class="footer-bottom">
+      <p>© 2026 Booking Football. All rights reserved.</p>
     </div>
+  </footer>
 
-    <footer class="site-footer">
-        <div class="container footer-grid">
-            <div>
-                <h3><i class="fas fa-futbol"></i> Booking Football</h3>
-                <p>Nền tảng đặt sân bóng đá hàng đầu Việt Nam. Nhanh chóng - Tiện lợi - Uy tín.</p>
-                <div class="social-icons">
-                    <i class="fab fa-facebook-f"></i>
-                    <i class="fab fa-youtube"></i>
-                    <i class="fas fa-globe"></i>
+  <script>
+    fetch("http://localhost:8080/api/fields")
+      .then((response) => response.json())
+      .then((data) => {
+        const container = document.getElementById("field-list");
+        container.innerHTML = "";
+
+        data.forEach((field) => {
+          console.log("FIELD:", field);
+
+          const linkAnh =
+            field.images && field.images.length > 0
+              ? field.images[0].imageUrl
+              : "../hinhanh/images (1).jpg";
+
+          const isMaintenance = field.status === false;
+
+          const imgStyle = isMaintenance ? "filter: grayscale(100%);" : "";
+
+          const badgeHTML = isMaintenance
+            ? `<div style="position: absolute; top: 10px; right: 10px; background-color: #dc3545; color: white; padding: 5px 10px; border-radius: 5px; font-weight: bold; font-size: 12px; z-index: 10;">Bảo trì</div>`
+            : "";
+
+          const fieldId = field.fieldId || field.id;
+
+          const targetLink = isMaintenance
+            ? "javascript:void(0)"
+            : `../giaodien/datsan.html?id=${fieldId}`;
+
+          const clickEvent = isMaintenance
+            ? `onclick="alert('Sân bóng này hiện đang được bảo trì. Vui lòng chọn sân khác!');"`
+            : "";
+
+          const cardHTML = `
+            <a href="${targetLink}" ${clickEvent} style="text-decoration:none; color:inherit; display:block; position: relative;">
+              <div class="pitch-card">
+                ${badgeHTML}
+                <img src="${linkAnh}" alt="Sân bóng" class="pitch-img" style="${imgStyle}">
+                <div class="pitch-info">
+                  <div class="pitch-header">
+                    <h3 class="pitch-name">${field.fieldName}</h3>
+                    <span class="pitch-rating">
+                      <i class="fas fa-star"></i> 5.0
+                    </span>
+                  </div>
+                  <div class="pitch-footer">
+                    <span class="pitch-location">${field.address}</span>
+                    <span class="pitch-price" style="${isMaintenance ? "color: #dc3545; font-weight: bold;" : ""}">
+                      ${isMaintenance ? "Tạm ngưng phục vụ" : "Xem chi tiết"}
+                    </span>
+                  </div>
                 </div>
-            </div>
-            <div>
-                <h4>DỊCH VỤ</h4>
-                <ul>
-                    <li>Đặt sân</li>
-                    <li>Tìm sân</li>
-                    <li>Giới thiệu</li>
-                    <li>Tin tức</li>
-                </ul>
-            </div>
-            <div>
-                <h4>HỖ TRỢ</h4>
-                <ul>
-                    <li>Hướng dẫn đặt sân</li>
-                    <li>Câu hỏi thường gặp</li>
-                    <li>Chính sách bảo mật</li>
-                    <li>Điều khoản sử dụng</li>
-                </ul>
-            </div>
-            <div>
-                <h4>LIÊN HỆ</h4>
-                <ul>
-                    <li>Hotline: 1900 1234</li>
-                    <li>Email: support@bookingfootball.vn</li>
-                    <li>Địa chỉ: 123 Nguyễn Trãi, Thanh Xuân, Hà Nội</li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2026 Booking Football. All rights reserved.</p>
-        </div>
-    </footer>
-    <script>
-fetch("http://localhost:8080/api/fields")
-        .then((response) => response.json())
-        .then((data) => {
-          const container = document.getElementById("field-list");
-          container.innerHTML = "";
+              </div>
+            </a>
+          `;
 
-          data.forEach((field) => {
-    console.log("FIELD:", field);
+          container.insertAdjacentHTML("beforeend", cardHTML);
+        });
+      })
+      .catch((error) => console.error("Lỗi API kìa bro:", error));
+  </script>
 
-    const linkAnh = field.images && field.images.length > 0
-        ? field.images[0].imageUrl
-        : "../hinhanh/images (1).jpg";
-            
-            // 1. Đọc trạng thái từ Database
-            const isMaintenance = field.status === false;
-            
-            // 2. Chế tạo Giao diện dựa theo trạng thái
-            const imgStyle = isMaintenance ? 'filter: grayscale(100%);' : '';
-            const badgeHTML = isMaintenance 
-                ? `<div style="position: absolute; top: 10px; right: 10px; background-color: #dc3545; color: white; padding: 5px 10px; border-radius: 5px; font-weight: bold; font-size: 12px; z-index: 10;">Bảo trì</div>` 
-                : '';
-            
-            // 3. Xử lý logic Click: Nếu bảo trì thì chặn click và báo lỗi, nếu không thì vào datsan.html
-            const targetLink = isMaintenance ? 'javascript:void(0)' : `../giaodien/datsan.html?id=${field.id}`;
-            const clickEvent = isMaintenance ? `onclick="alert('Sân bóng này hiện đang được bảo trì. Vui lòng chọn sân khác!');"` : '';
-
-            // 4. Đúc HTML
-            const cardHTML = `
-                    <a href="${targetLink}" ${clickEvent} style="text-decoration:none; color:inherit; display:block; position: relative;">
-                        <div class="pitch-card">
-                            ${badgeHTML}
-                            <img src="${linkAnh}" alt="Sân bóng" class="pitch-img" style="${imgStyle}">
-                            <div class="pitch-info">
-                                <div class="pitch-header">
-                                    <h3 class="pitch-name">${field.fieldName}</h3>
-                                    <span class="pitch-rating"><i class="fas fa-star"></i> 5.0</span>
-                                </div>
-                                <div class="pitch-footer">
-                                    <span class="pitch-location">${field.address}</span>
-                                    <span class="pitch-price" style="${isMaintenance ? 'color: #dc3545; font-weight: bold;' : ''}">
-                                        ${isMaintenance ? 'Tạm ngưng phục vụ' : 'Xem chi tiết'}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                `;
-            container.insertAdjacentHTML("beforeend", cardHTML);
-          });
-        })
-        .catch((error) => console.error("Lỗi API kìa bro:", error));
-    </script>
-    <script src="../hd/timkiem.js"></script>
-    <script src="../hd/datsanimage.js"></script>
-    
-
-
-    <script>
-  const authButtons = document.getElementById("auth-buttons");
-  const isLogin = localStorage.getItem("isLogin");
-  const fullName = localStorage.getItem("fullName");
-
-  if (isLogin === "true") {
-    authButtons.innerHTML = `
-      <span style="font-weight:bold;color:#008940;">
-        Xin chào, ${fullName || "người dùng"}
-      </span>
-
-      <a href="Quanlidon.html" class="btn-register" style="background-color:#17a2b8;">
-        Lịch sử đặt sân
-      </a>
-
-      <button onclick="logout()" class="btn-login">
-        Đăng xuất
-      </button>
-    `;
-  }
-
-  function logout() {
-    localStorage.removeItem("userId");
-    localStorage.removeItem("fullName");
-    localStorage.removeItem("phone");
-    localStorage.removeItem("isLogin");
-
-    window.location.href = "dangnhap.html";
-  }
-</script>
-  </body>
+  <script src="../hd/timkiem.js"></script>
+  <script src="../hd/datsanimage.js"></script>
+  <script src="../hd/continuebuton.js"></script>
+  <script src="../hd/avatar.js"></script>
+</body>
 </html>

@@ -1,268 +1,272 @@
 /* --- CÀI ĐẶT CƠ BẢN --- */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-    background-color: #f5f7f9; /* Màu nền xám nhạt */
-    color: #333;
+  background-color: #f5f7f9; /* Màu nền xám nhạt */
+  color: #333;
 }
 
 /* Khung chứa nội dung canh giữa màn hình, rộng tối đa 1200px */
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 /* --- KHU VỰC 1: BANNER --- */
 .hero-section {
-    /* Đổi link ảnh ở đây nếu muốn banner khác */
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1459865264687-595d652de67e?q=80&w=1920') center/cover;
-    height: 450px;
-    display: flex;
-    align-items: center;
-    color: white;
+  /* Đổi link ảnh ở đây nếu muốn banner khác */
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("https://images.unsplash.com/photo-1459865264687-595d652de67e?q=80&w=1920")
+      center/cover;
+  height: 450px;
+  display: flex;
+  align-items: center;
+  color: white;
 }
 
 .hero-title {
-    font-size: 42px;
-    margin-bottom: 15px;
+  font-size: 42px;
+  margin-bottom: 15px;
 }
 
 .hero-subtitle {
-    font-size: 16px;
-    margin-bottom: 30px;
-    color: #ccc;
-    max-width: 600px;
+  font-size: 16px;
+  margin-bottom: 30px;
+  color: #ccc;
+  max-width: 600px;
 }
 
 .search-box {
-    background: white;
-    padding: 15px;
-    border-radius: 8px;
-    display: flex;
-    gap: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  display: flex;
+  gap: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .search-input {
-    flex: 1;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
 }
 
 .btn-search {
-    background-color: #008940; /* Xanh lá chuẩn thiết kế */
-    color: white;
-    border: none;
-    padding: 0 30px;
-    border-radius: 4px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
+  background-color: #008940; /* Xanh lá chuẩn thiết kế */
+  color: white;
+  border: none;
+  padding: 0 30px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 .btn-search:hover {
-    background-color: #006b32;
+  background-color: #006b32;
 }
 
 /* --- KHU VỰC 2: CÁC TIỆN ÍCH --- */
 .features-row {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    margin-top: -30px; /* Đẩy trồi lên đè lên banner xíu cho đẹp */
-    margin-bottom: 50px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: -30px; /* Đẩy trồi lên đè lên banner xíu cho đẹp */
+  margin-bottom: 50px;
 }
 
 .feature-box {
-    background: white;
-    flex: 1;
-    padding: 20px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  background: white;
+  flex: 1;
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .feature-icon {
-    width: 50px;
-    height: 50px;
-    background: #e8f5e9;
-    color: #008940;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
+  width: 50px;
+  height: 50px;
+  background: #e8f5e9;
+  color: #008940;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
 }
 
 .feature-box p {
-    font-size: 13px;
-    color: #777;
-    margin-top: 5px;
+  font-size: 13px;
+  color: #777;
+  margin-top: 5px;
 }
 
 /* --- KHU VỰC 3: DANH SÁCH SÂN BÓNG --- */
 .section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
 }
 
 .section-header h2 {
-    font-size: 24px;
+  font-size: 24px;
 }
 
 .view-all {
-    color: #008940;
-    text-decoration: none;
-    font-weight: bold;
+  color: #008940;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 /* Chia lưới 3 cột cho máy tính */
 .pitch-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-    margin-bottom: 50px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  margin-bottom: 50px;
 }
 
 .pitch-card {
-    background: white;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    transition: transform 0.2s;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s;
 }
 
 .pitch-card:hover {
-    transform: translateY(-5px); /* Hiệu ứng nảy lên khi đưa chuột vào */
+  transform: translateY(-5px); /* Hiệu ứng nảy lên khi đưa chuột vào */
 }
 
 .pitch-img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
 }
 
 .pitch-info {
-    padding: 15px 20px;
+  padding: 15px 20px;
 }
 
 .pitch-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 .pitch-name {
-    font-size: 16px;
-    color: #333;
+  font-size: 16px;
+  color: #333;
 }
 
 .pitch-rating {
-    color: #ffc107;
-    font-size: 14px;
-    font-weight: bold;
+  color: #ffc107;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 .pitch-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 13px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
 }
 
 .pitch-location {
-    color: #888;
+  color: #888;
 }
 
 .pitch-price {
-    color: #008940;
-    font-weight: bold;
+  color: #008940;
+  font-weight: bold;
 }
 
 /* --- KHU VỰC 4: BANNER ĐĂNG KÝ --- */
 .owner-banner {
-    background-color: #e8f5e9;
-    padding: 30px 40px;
-    border-radius: 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 50px;
+  background-color: #e8f5e9;
+  padding: 30px 40px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 50px;
 }
 
 .owner-banner p {
-    color: #555;
-    margin-top: 10px;
+  color: #555;
+  margin-top: 10px;
 }
 
 .btn-register {
-    background-color: #008940;
-    color: white;
-    border: none;
-    padding: 15px 30px;
-    border-radius: 4px;
-    font-weight: bold;
-    cursor: pointer;
+  background-color: #008940;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 /* --- KHU VỰC 5: FOOTER --- */
 .footer {
-    background-color: #1a202c;
-    color: #a0aec0;
-    text-align: center;
-    padding: 20px;
-    font-size: 14px;
+  background-color: #1a202c;
+  color: #a0aec0;
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
 }
 /* Canh 2 nút nằm ngang cách nhau một xíu */
 .auth-buttons {
-    display: flex;
-    gap: 15px; 
-    align-items: center;
-    margin-left: 20px; /* Đẩy nó xa xa cái menu một xíu */
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  margin-left: 20px; /* Đẩy nó xa xa cái menu một xíu */
 }
 
 /* Nút Đăng nhập: Viền xanh, chữ xanh */
 .btn-login {
-    text-decoration: none;
-    color: #00a651;
-    font-weight: bold;
-    padding: 8px 18px;
-    border: 2px solid #00a651;
-    border-radius: 6px;
-    transition: all 0.3s ease;
+  text-decoration: none;
+  color: #00a651;
+  font-weight: bold;
+  padding: 8px 18px;
+  border: 2px solid #00a651;
+  border-radius: 6px;
+  transition: all 0.3s ease;
 }
 
 .btn-login:hover {
-    background-color: #00a651;
-    color: white;
+  background-color: #00a651;
+  color: white;
 }
 
 /* Nút Đăng ký: Nền xanh, chữ trắng */
 .btn-register {
-    text-decoration: none;
-    color: white;
-    background-color: #00a651;
-    font-weight: bold;
-    padding: 8px 18px;
-    border: 2px solid #00a651;
-    border-radius: 6px;
-    transition: all 0.3s ease;
+  text-decoration: none;
+  color: white;
+  background-color: #00a651;
+  font-weight: bold;
+  padding: 8px 18px;
+  border: 2px solid #00a651;
+  border-radius: 6px;
+  transition: all 0.3s ease;
 }
 
 .btn-register:hover {
+
     background-color: #008f45;
     border-color: #008f45;
 }
@@ -289,3 +293,54 @@ body {
     text-align: center;
     padding: 15px;
 }
+.footer-bottom p {
+    font-size: 12px;
+    color: #888;
+  background-color: #008f45;
+  border-color: #008f45;
+}
+.auth-buttons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.avatar-box {
+  display: none;
+  position: relative;
+}
+
+.avatar-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.avatar-menu {
+  display: none;
+  position: absolute;
+  top: 60px;
+  right: 0;
+  background-color: white;
+  width: 180px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 999;
+}
+
+.avatar-menu a {
+  display: block;
+  padding: 12px 16px;
+  color: #333;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.avatar-menu a:hover {
+  background-color: #f2f2f2;
+  color: #00a651;
+}
+

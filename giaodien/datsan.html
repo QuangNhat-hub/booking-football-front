@@ -24,12 +24,12 @@
                 <li><a href="#">Liên hệ</a></li>
             </ul>
 
-            <div class="auth-btns" id="auth-buttons">
-    <button class="btn-outline">Đăng nhập</button>
-    <a href="../giaodien/dangky.html">
-        <button class="btn-solid">Đăng ký</button>
-    </a>
-</div>
+            <div class="auth-btns">
+
+                <button class="btn-outline">Đăng nhập</button>
+                <a href="../giaodien/dangky.html">
+                    <button class="btn-solid">Đăng ký</button></a>
+            </div>
         </div>
     </header>
 
@@ -55,8 +55,11 @@
                         <span id="dia-chi-chi-tiet">Đang tải địa chỉ...</span>
                     </p>
 
-                    <p class="field-rating"><i class="fas fa-star text-yellow"></i> 4.8 đánh giá <span>(120 lượt đánh
-                            giá)</span></p>
+                    <p class="field-rating">
+                        <i class="fas fa-star text-yellow"></i> 
+                        <span id="top-avg-rating">0.0</span> đánh giá 
+                        <span>(<span id="top-total-reviews">0</span> lượt đánh giá)</span>
+                    </p>
 
                     <div class="facilities-grid">
                         <span><i class="fas fa-users"></i> Sân 7 người</span>
@@ -158,6 +161,42 @@
         </div>
     </div>
 
+    <div class="booking-card" style="margin-top: 30px; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); clear: both;">
+        <h3 class="card-title" style="font-size: 18px; font-weight: bold; margin-bottom: 15px; color: #333;">Đánh giá sân bóng</h3>
+        
+        <div class="review-summary mb-3" style="background:#f8f9fa; padding:15px; border-radius:6px;">
+            <div class="d-flex align-items-center" style="gap: 15px;">
+                <h2 class="mb-0 text-warning" id="avgRating" style="font-size: 36px; font-weight: bold; color: #fe9431; margin: 0;">0.0</h2>
+                <div>
+                    <div id="starSummary" style="font-size:20px; color: #fe9431; display: flex; gap: 2px;"></div>
+                    <div class="text-muted small" id="totalReviews" style="color: #666; margin-top: 4px;">(0 đánh giá)</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="area-viet-danh-gia" style="display: none; margin-bottom: 25px; border-bottom: 1px dashed #eee; padding-bottom: 20px;">
+            <h4 style="font-size: 14px; margin-bottom: 10px; color: #333; font-weight: bold;">Chia sẻ trải nghiệm của bạn</h4>
+            
+            <div class="rating-stars-input" style="margin-bottom: 12px; font-size: 24px; color: #ccc; display: flex; gap: 5px;">
+                <span class="star-clickable" data-value="1" style="cursor: pointer;"><i class="far fa-star"></i></span>
+                <span class="star-clickable" data-value="2" style="cursor: pointer;"><i class="far fa-star"></i></span>
+                <span class="star-clickable" data-value="3" style="cursor: pointer;"><i class="far fa-star"></i></span>
+                <span class="star-clickable" data-value="4" style="cursor: pointer;"><i class="far fa-star"></i></span>
+                <span class="star-clickable" data-value="5" style="cursor: pointer;"><i class="far fa-star"></i></span>
+                <input type="hidden" id="review-rating-value" value="0">
+            </div>
+
+            <textarea id="review-comment" placeholder="Sân tốt, cỏ mượt, đèn sáng không bồ?..." 
+                      style="width: 100%; height: 80px; padding: 10px; border: 1px solid #ddd; border-radius: 4px; resize: none; font-size: 13px; margin-bottom: 10px; box-sizing: border-box;"></textarea>
+            
+            <button id="btn-gui-danh-gia" class="btn-solid" style="width: 100%; padding: 11px; font-size: 14px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Gửi đánh giá</button>
+        </div>
+
+        <div id="danh-sach-reviews">
+            <p style="font-size: 13px; color: #888; text-align: center;">Đang tải đánh giá từ hệ thống...</p>
+        </div>
+    </div>
+
     <footer class="site-footer">
         <div class="container footer-grid">
             <div>
@@ -219,6 +258,8 @@
     </script>
     
     <script src="../hd/datsanimage.js"></script>
+    <script src="../hd/continuebuton.js"></script>
+    <script src="../hd/review.js"></script>
 
 
 
@@ -228,7 +269,6 @@ let selectedDate = null;
 let selectedHour = null;
 let selectedPrice = 0;
 const btnTiepTuc = document.getElementById("btn-tiep-tuc"); function checkBookingReady() { btnTiepTuc.disabled = !(selectedDate && selectedHour); }
-btnTiepTuc.disabled = true;
 const calendarGrid = document.getElementById("calendar-grid");
 const calendarTitle = document.getElementById("calendar-title");
 const summaryNgay = document.getElementById("summary-ngay");
@@ -372,24 +412,20 @@ document.getElementById("btn-tiep-tuc")
         return;
     }
 
-    const yyyy = selectedDate.getFullYear();
-const mm = String(selectedDate.getMonth() + 1).padStart(2, "0");
-const dd = String(selectedDate.getDate()).padStart(2, "0");
-
-const dateString = `${yyyy}-${mm}-${dd}`;
+    const dateString =
+        selectedDate.toISOString()
+            .split("T")[0];
 
     const startTime =
         `${dateString}T${selectedHour}:00`;
-console.log("ID từ URL:", id)
-    const bookingData = {
-    userId: Number(userId),
-    pitchId: Number(id),
-    startTime: startTime,
-    hours: 1,
-    totalPrice: selectedPrice
-};
 
-console.log("BOOKING DATA:", bookingData);
+    const bookingData = {
+        userId: Number(userId),
+        pitchId: Number(id),
+        startTime: startTime,
+        hours: 1
+    };
+
     try {
 
         const response =
@@ -407,51 +443,16 @@ console.log("BOOKING DATA:", bookingData);
                 }
             );
 
-       const text = await response.text();
+        const result =
+            await response.text();
 
-let result = {};
-try {
-    result = JSON.parse(text);
-} catch (e) {
-    result = { message: text };
-}
+        if (!response.ok) {
+            throw new Error(result);
+        }
 
-if (!response.ok) {
-    throw new Error(result.message || "Đặt sân thất bại");
-}
+        alert("Đặt sân thành công");
 
-
-// XÓA THÔNG TIN ĐƠN CŨ
-localStorage.setItem("bookingId", result.id);
-
-localStorage.setItem(
-    "bookingField",
-    document.getElementById("summary-ten-san").innerText
-);
-
-localStorage.setItem(
-    "bookingDate",
-    document.getElementById("summary-ngay").innerText
-);
-
-localStorage.setItem(
-    "bookingTime",
-    document.getElementById("summary-gio").innerText
-);
-
-localStorage.setItem(
-    "bookingPrice",
-    document.getElementById("summary-tien").innerText
-);
-
-alert(
-    "Sân: " + localStorage.getItem("bookingField") +
-    "\nNgày: " + localStorage.getItem("bookingDate") +
-    "\nGiờ: " + localStorage.getItem("bookingTime") +
-    "\nTiền: " + localStorage.getItem("bookingPrice")
-);
-localStorage.removeItem("bookingStatus");
-window.location.href = "thanhtoan.html";
+        await loadBookedHours();
 
     } catch (err) {
 
@@ -460,97 +461,52 @@ window.location.href = "thanhtoan.html";
 
 });
 async function loadBookedHours() {
+
     if (!selectedDate || !id) return;
 
-    try {
-        const response = await fetch(
+    const response =
+        await fetch(
             `http://localhost:8080/api/bookings/field/${id}`
         );
 
-        if (!response.ok) {
-            console.error("API lỗi:", response.status);
-            return;
-        }
+    const bookings =
+        await response.json();
 
-        const bookings = await response.json();
+    document.querySelectorAll(".time-slot")
+        .forEach(slot => {
+            slot.classList.remove("booked");
+        });
 
-        if (!Array.isArray(bookings)) {
-            console.error("bookings không phải mảng:", bookings);
+    const selectedDateString =
+        selectedDate.toISOString().split("T")[0];
+
+    bookings.forEach(booking => {
+
+        const bookingDate =
+            booking.startTime.split("T")[0];
+
+        if (bookingDate !== selectedDateString)
             return;
-        }
+
+        const bookingHour =
+            booking.startTime.substring(11,16);
 
         document.querySelectorAll(".time-slot")
             .forEach(slot => {
-                slot.classList.remove("booked");
+
+                const hour =
+                    slot.querySelector("strong")
+                        .innerText;
+
+                if (hour === bookingHour) {
+                    slot.classList.add("booked");
+                }
             });
-
-        const selectedDateString =
-            selectedDate.toISOString().split("T")[0];
-
-        bookings.forEach(booking => {
-            const bookingDate =
-                booking.startTime.split("T")[0];
-
-            if (bookingDate !== selectedDateString) return;
-
-            const bookingHour =
-                booking.startTime.substring(11, 16);
-
-            document.querySelectorAll(".time-slot")
-                .forEach(slot => {
-                    const hour =
-                        slot.querySelector("strong").innerText;
-
-                    if (hour === bookingHour) {
-                        slot.classList.add("booked");
-                    }
-                });
-        });
-
-    } catch (error) {
-        console.error("Lỗi loadBookedHours:", error);
-    }
+    });
 }
 
 renderCalendar();
-
 </script>
-<script>
-const authButtons = document.getElementById("auth-buttons");
-const isLogin = localStorage.getItem("isLogin");
-const fullName = localStorage.getItem("fullName");
-
-if (isLogin === "true") {
-    authButtons.innerHTML = `
-        <span style="font-weight:bold;color:#008940;">
-            Xin chào, ${fullName || "người dùng"}
-        </span>
-
-        <a href="Quanlidon.html">
-            <button class="btn-solid" style="background-color:#17a2b8;">
-                Lịch sử đặt sân
-            </button>
-        </a>
-
-        <button onclick="logout()" class="btn-outline">
-            Đăng xuất
-        </button>
-    `;
-}
-
-function logout() {
-    localStorage.clear();
-    window.location.href = "dangnhap.html";
-}
-</script>
-
-
-
-
-
 </body>
-
-
-
 
 </html>
