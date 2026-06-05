@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản Lý Đơn Đặt - Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link rel="stylesheet" href="../dinhdang/style.css" />
+    <link rel="stylesheet" href="../dinhdang/style2.css" />
+    <link rel="stylesheet" href="../dinhdang/style4.css" />
+    <style>
+        .admin-table-container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-top: 20px; overflow-x: auto;}
+        table { width: 100%; border-collapse: collapse; min-width: 800px; }
+        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #f8f9fa; font-weight: bold; color: #333; }
+        tr:hover { background-color: #f1f1f1; }
+        .badge { padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; color: white; }
+        .badge-pending { background-color: #ffc107; color: #000; }
+        .badge-confirmed { background-color: #28a745; }
+        .badge-cancelled { background-color: #dc3545; }
+        .btn-action { padding: 6px 10px; border: none; border-radius: 4px; cursor: pointer; color: white; margin-right: 5px; font-size: 13px;}
+        .btn-approve { background-color: #28a745; }
+        .btn-cancel { background-color: #dc3545; }
+    </style>
+  </head>
+  <body style="background-color: #f4f6f9;">
+    
+    <header class="admin-header">
+      <div class="logo">
+        <h2 style="color: #00a651; margin: 0"><i class="fas fa-clipboard-list"></i> Quản Lý Đơn Đặt Sân</h2>
+      </div>
+      <div class="auth-buttons">
+        <a href="admin_index.html" style="margin-right: 20px; text-decoration: none; color: #333; font-weight: bold;"><i class="fas fa-home"></i> Trang Chủ Admin</a>
+        <button onclick="logout()" class="btn-logout">Đăng xuất</button>
+      </div>
+    </header>
+
+    <div class="container">
+        <div class="admin-table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mã Đơn</th>
+                        <th>Khách Hàng</th>
+                        <th>Sân Bóng</th>
+                        <th>Ngày Đặt</th>
+                        <th>Tổng Tiền</th>
+                        <th>Trạng Thái</th>
+                        <th>Thao Tác</th>
+                    </tr>
+                </thead>
+                <tbody id="booking-list">
+                    <tr>
+                        <td colspan="7" style="text-align: center;">Đang tải dữ liệu...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="../hd/admin_quanlydon.js"></script>
+  </body>
+</html>
