@@ -249,11 +249,19 @@
     grid-template-columns: 2fr 1fr 1fr 1fr;
     gap: 30px;
     margin-bottom: 40px;
+    text-align: left;
 }
 .footer-grid h3 { font-size: 20px; margin-bottom: 15px; }
 .footer-grid h4 { font-size: 15px; margin-bottom: 20px; color: #a5d6a7; }
 .footer-grid p { font-size: 13px; color: #ccc; line-height: 1.6; margin-bottom: 15px;}
-.footer-grid ul { list-style: none; font-size: 13px; color: #ccc; line-height: 2.2; }
+.footer-grid ul { 
+    list-style: none; 
+    font-size: 13px; 
+    color: #ccc; 
+    line-height: 2.2; 
+    padding: 0; /* Xóa khoảng thụt lề mặc định của thẻ ul */
+    margin: 0;  
+}
 .social-icons i {
     width: 35px; height: 35px;
     border: 1px solid #ccc;
@@ -269,6 +277,31 @@
     padding: 15px;
     font-size: 12px;
     color: #888;
+}
+
+.cal-day.disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    background: #eee;
+    color: #999;
+}
+
+.cal-day.empty {
+    background: transparent;
+    cursor: default;
+}
+.btn-continue:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+.time-slot.booked{
+    background:#ddd;
+    pointer-events:none;
+    opacity:0.5;
+}
+
+.time-slot.selected{
+    border:2px solid #28a745;
 }
 
 /* ================= STYLE CHO KHU VỰC REVIEW SÂN BÓNG ================= */
