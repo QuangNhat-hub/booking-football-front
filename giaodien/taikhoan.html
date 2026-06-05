@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tài khoản cá nhân - Booking Football</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../dinhdang/style.css" />
+    <link rel="stylesheet" href="../dinhdang/style2.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="container nav-content">
+        <div class="logo"><i class="fas fa-futbol"></i> Booking Football</div>
+
+        <ul class="nav-links">
+          <li><a href="index.html">Trang chủ</a></li>
+          <li><a href="datsan.html">Đặt sân</a></li>
+          <li><a href="Quanlidon.html">Lịch sử đặt sân</a></li>
+          <li><a href="taikhoan.html" class="active">Tài khoản</a></li>
+        </ul>
+
+        <div class="auth-btns">
+          <button onclick="logout()" class="btn-outline">Đăng xuất</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container account-page">
+      <div class="account-title-box">
+        <h1><i class="fas fa-user-circle"></i> Tài khoản cá nhân</h1>
+        <p>
+          Cập nhật thông tin cá nhân, số điện thoại đăng nhập và mật khẩu của
+          bạn.
+        </p>
+      </div>
+
+      <div class="account-layout">
+        <!-- Cập nhật thông tin -->
+        <section class="account-card">
+          <h2>Cập nhật thông tin cá nhân</h2>
+
+          <form id="profileForm">
+            <div class="input-group">
+              <label>Họ và tên</label>
+              <input
+                type="text"
+                id="fullName"
+                placeholder="Nhập họ và tên"
+                required
+              />
+            </div>
+
+            <div class="input-group">
+              <label>Số điện thoại đăng nhập mới</label>
+              <input
+                type="text"
+                id="phone"
+                placeholder="Nhập số điện thoại"
+                required
+              />
+              <small
+                >Sau khi lưu, bạn sẽ đăng nhập bằng số điện thoại mới
+                này.</small
+              >
+            </div>
+
+            <div class="input-group">
+              <label>Email</label>
+              <input type="email" id="email" placeholder="Email" disabled />
+            </div>
+
+            <button type="submit" class="btn-submit">Lưu thông tin</button>
+          </form>
+        </section>
+
+        <!-- Đổi mật khẩu -->
+        <section class="account-card">
+          <h2>Sửa mật khẩu</h2>
+
+          <form id="passwordForm">
+            <div class="input-group">
+              <label>Mật khẩu hiện tại</label>
+              <div class="password-box">
+                <input
+                  type="password"
+                  id="oldPassword"
+                  placeholder="Nhập mật khẩu hiện tại"
+                  required
+                />
+                <i
+                  class="fas fa-eye toggle-password"
+                  data-target="oldPassword"
+                ></i>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label>Mật khẩu mới</label>
+              <div class="password-box">
+                <input
+                  type="password"
+                  id="newPassword"
+                  placeholder="Nhập mật khẩu mới"
+                  required
+                />
+                <i
+                  class="fas fa-eye toggle-password"
+                  data-target="newPassword"
+                ></i>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label>Nhập lại mật khẩu mới</label>
+              <div class="password-box">
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  placeholder="Nhập lại mật khẩu mới"
+                  required
+                />
+                <i
+                  class="fas fa-eye toggle-password"
+                  data-target="confirmPassword"
+                ></i>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-submit">Đổi mật khẩu</button>
+          </form>
+        </section>
+      </div>
+    </main>
+
+    <script src="../hd/taikhoan.js"></script>
+  </body>
+</html>

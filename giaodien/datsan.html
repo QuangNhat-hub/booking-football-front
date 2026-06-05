@@ -1,484 +1,551 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Đặt Sân - Booking Football</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="../dinhdang/style2.css">
-</head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../dinhdang/style2.css" />
+  </head>
 
-<body>
-
-<header class="navbar">
-    <div class="container nav-content">
-        <div class="logo">
-            <i class="fas fa-futbol"></i> Booking Football
-        </div>
+  <body>
+    <header class="navbar">
+      <div class="container nav-content">
+        <div class="logo"><i class="fas fa-futbol"></i> Booking Football</div>
 
         <ul class="nav-links">
-            <li><a href="index.html">Trang chủ</a></li>
-            <li><a href="datsan.html" class="active">Đặt sân</a></li>
-            <li><a href="#">Giới thiệu</a></li>
-            <li><a href="#">Tin tức</a></li>
-            <li><a href="#">Liên hệ</a></li>
+          <li><a href="index.html">Trang chủ</a></li>
+          <li><a href="datsan.html" class="active">Đặt sân</a></li>
+          <li><a href="#">Giới thiệu</a></li>
+          <li><a href="#">Tin tức</a></li>
+          <li><a href="#">Liên hệ</a></li>
         </ul>
 
         <div class="auth-btns" id="auth-buttons">
+          <a href="../giaodien/dangnhap.html">
             <button class="btn-outline">Đăng nhập</button>
-            <a href="../giaodien/dangky.html">
-                <button class="btn-solid">Đăng ký</button>
-            </a>
+          </a>
+          <a href="../giaodien/dangky.html">
+            <button class="btn-solid">Đăng ký</button>
+          </a>
         </div>
-    </div>
-</header>
+      </div>
+    </header>
 
-<div class="container main-content">
-    <div class="breadcrumb">
+    <div class="container main-content">
+      <div class="breadcrumb">
         <a href="index.html">Trang chủ</a> &rsaquo; <span>Đặt sân</span>
-    </div>
+      </div>
 
-    <h2 class="page-title">Đặt sân</h2>
+      <h2 class="page-title">Đặt sân</h2>
 
-    <div class="booking-layout">
-
+      <div class="booking-layout">
         <aside class="left-col">
-            <div class="booking-card">
-                <h3 class="card-title">Thông tin sân</h3>
-                <img src="../hinhanh/images (1).jpg" id="anh-san-chi-tiet" alt="Sân" class="detail-img">
+          <div class="booking-card">
+            <h3 class="card-title">Thông tin sân</h3>
+            <img
+              src="../hinhanh/images (1).jpg"
+              id="anh-san-chi-tiet"
+              alt="Sân"
+              class="detail-img"
+            />
 
-                <h2 class="field-name-large" id="ten-san-chi-tiet">Đang tải tên sân...</h2>
+            <h2 class="field-name-large" id="ten-san-chi-tiet">
+              Đang tải tên sân...
+            </h2>
 
-                <p class="field-address">
-                    <i class="fas fa-map-marker-alt text-red"></i>
-                    <span id="dia-chi-chi-tiet">Đang tải địa chỉ...</span>
-                </p>
+            <p class="field-address">
+              <i class="fas fa-map-marker-alt text-red"></i>
+              <span id="dia-chi-chi-tiet">Đang tải địa chỉ...</span>
+            </p>
 
-                <p class="field-rating">
-                    <i class="fas fa-star text-yellow"></i> 4.8 đánh giá
-                    <span>(120 lượt đánh giá)</span>
-                </p>
+            <p class="field-rating">
+              <i class="fas fa-star text-yellow"></i> 4.8 đánh giá
+              <span>(120 lượt đánh giá)</span>
+            </p>
 
-                <div class="facilities-grid">
-                    <span><i class="fas fa-users"></i> Sân 7 người</span>
-                    <span><i class="fas fa-leaf"></i> Cỏ nhân tạo</span>
-                    <span><i class="fas fa-parking"></i> Có giữ xe</span>
-                    <span><i class="fas fa-lightbulb"></i> Mở hệ đèn</span>
-                    <span><i class="fas fa-tint"></i> Nước uống</span>
-                </div>
+            <div class="facilities-grid">
+              <span><i class="fas fa-users"></i> Sân 7 người</span>
+              <span><i class="fas fa-leaf"></i> Cỏ nhân tạo</span>
+              <span><i class="fas fa-parking"></i> Có giữ xe</span>
+              <span><i class="fas fa-lightbulb"></i> Mở hệ đèn</span>
+              <span><i class="fas fa-tint"></i> Nước uống</span>
+            </div>
+          </div>
+
+          <div class="booking-card">
+            <div class="calendar-header">
+              <i class="fas fa-chevron-left" id="prev-month"></i>
+              <strong id="calendar-title"></strong>
+              <i class="fas fa-chevron-right" id="next-month"></i>
             </div>
 
-            <div class="booking-card">
-                <div class="calendar-header">
-                    <i class="fas fa-chevron-left" id="prev-month"></i>
-                    <strong id="calendar-title"></strong>
-                    <i class="fas fa-chevron-right" id="next-month"></i>
-                </div>
+            <div class="calendar-grid" id="calendar-grid"></div>
 
-                <div class="calendar-grid" id="calendar-grid"></div>
-
-                <div class="calendar-notes">
-                    <p><i class="fas fa-circle"></i> Giờ mở cửa: 05:00 - 23:00</p>
-                    <p><i class="fas fa-circle"></i> Giá có thể thay đổi tùy theo khung giờ</p>
-                </div>
+            <div class="calendar-notes">
+              <p><i class="fas fa-circle"></i> Giờ mở cửa: 05:00 - 23:00</p>
+              <p>
+                <i class="fas fa-circle"></i> Giá có thể thay đổi tùy theo khung
+                giờ
+              </p>
             </div>
+          </div>
         </aside>
 
         <main class="right-col">
-            <div class="booking-card">
-                <h3 class="card-title">Chọn khung giờ</h3>
+          <div class="booking-card">
+            <h3 class="card-title">Chọn khung giờ</h3>
 
-                <div class="time-legend">
-                    <span><div class="legend-box available"></div> Còn trống</span>
-                    <span><div class="legend-box booked"></div> Đã đặt</span>
-                    <span><div class="legend-box selected"></div> Đang chọn</span>
-                </div>
-
-                <h4 class="time-section-title">Buổi sáng</h4>
-                <div class="time-grid">
-                    <div class="time-slot available"><strong>05:00</strong><span>30.000</span></div>
-                    <div class="time-slot available"><strong>06:00</strong><span>80.000</span></div>
-                    <div class="time-slot available"><strong>07:00</strong><span>150.000</span></div>
-                    <div class="time-slot available"><strong>08:00</strong><span>150.000</span></div>
-                    <div class="time-slot available"><strong>09:00</strong><span>150.000</span></div>
-                    <div class="time-slot available"><strong>10:00</strong><span>150.000</span></div>
-                    <div class="time-slot available"><strong>11:00</strong><span>150.000</span></div>
-                </div>
-
-                <h4 class="time-section-title">Buổi chiều</h4>
-                <div class="time-grid">
-                    <div class="time-slot available"><strong>12:00</strong><span>40.000</span></div>
-                    <div class="time-slot available"><strong>13:00</strong><span>60.000</span></div>
-                    <div class="time-slot available"><strong>14:00</strong><span>150.000</span></div>
-                    <div class="time-slot available"><strong>15:00</strong><span>150.000</span></div>
-                    <div class="time-slot available"><strong>16:00</strong><span>150.000</span></div>
-                    <div class="time-slot available"><strong>17:00</strong><span>150.000</span></div>
-                    <div class="time-slot available"><strong>18:00</strong><span>200.000</span></div>
-                </div>
-
-                <h4 class="time-section-title">Buổi tối</h4>
-                <div class="time-grid">
-                    <div class="time-slot available"><strong>19:00</strong><span>250.000</span></div>
-                    <div class="time-slot available"><strong>20:00</strong><span>250.000</span></div>
-                    <div class="time-slot available"><strong>21:00</strong><span>250.000</span></div>
-                    <div class="time-slot available"><strong>22:00</strong><span>200.000</span></div>
-                    <div class="time-slot available"><strong>23:00</strong><span>150.000</span></div>
-                </div>
+            <div class="time-legend">
+              <span
+                ><div class="legend-box available"></div>
+                Còn trống</span
+              >
+              <span
+                ><div class="legend-box booked"></div>
+                Đã đặt</span
+              >
+              <span
+                ><div class="legend-box selected"></div>
+                Đang chọn</span
+              >
             </div>
 
-            <div class="booking-card">
-                <h3 class="card-title">Thông tin đặt sân</h3>
-
-                <div class="summary-grid">
-                    <div class="summary-item">
-                        <span>Sân</span>
-                        <strong id="summary-ten-san">Đang tải...</strong>
-                    </div>
-
-                    <div class="summary-item">
-                        <span>Ngày</span>
-                        <strong id="summary-ngay"></strong>
-                    </div>
-
-                    <div class="summary-item">
-                        <span>Khung giờ</span>
-                        <strong id="summary-gio"></strong>
-                    </div>
-
-                    <div class="summary-item">
-                        <span>Thành tiền</span>
-                        <strong id="summary-tien" class="total-price">0đ</strong>
-                    </div>
-                </div>
-
-                <button id="btn-tiep-tuc" class="btn-continue">Tiếp tục</button>
+            <h4 class="time-section-title">Buổi sáng</h4>
+            <div class="time-grid">
+              <div class="time-slot available">
+                <strong>05:00</strong><span>30.000</span>
+              </div>
+              <div class="time-slot available">
+                <strong>06:00</strong><span>80.000</span>
+              </div>
+              <div class="time-slot available">
+                <strong>07:00</strong><span>150.000</span>
+              </div>
+              <div class="time-slot available">
+                <strong>08:00</strong><span>150.000</span>
+              </div>
+              <div class="time-slot available">
+                <strong>09:00</strong><span>150.000</span>
+              </div>
+              <div class="time-slot available">
+                <strong>10:00</strong><span>150.000</span>
+              </div>
+              <div class="time-slot available">
+                <strong>11:00</strong><span>150.000</span>
+              </div>
             </div>
+
+            <h4 class="time-section-title">Buổi chiều</h4>
+            <div class="time-grid">
+              <div class="time-slot available">
+                <strong>12:00</strong><span>40.000</span>
+              </div>
+              <div class="time-slot available">
+                <strong>13:00</strong><span>60.000</span>
+              </div>
+              <div class="time-slot available">
+                <strong>14:00</strong><span>150.000</span>
+              </div>
+              <div class="time-slot available">
+                <strong>15:00</strong><span>150.000</span>
+              </div>
+              <div class="time-slot available">
+                <strong>16:00</strong><span>150.000</span>
+              </div>
+              <div class="time-slot available">
+                <strong>17:00</strong><span>150.000</span>
+              </div>
+              <div class="time-slot available">
+                <strong>18:00</strong><span>200.000</span>
+              </div>
+            </div>
+
+            <h4 class="time-section-title">Buổi tối</h4>
+            <div class="time-grid">
+              <div class="time-slot available">
+                <strong>19:00</strong><span>250.000</span>
+              </div>
+              <div class="time-slot available">
+                <strong>20:00</strong><span>250.000</span>
+              </div>
+              <div class="time-slot available">
+                <strong>21:00</strong><span>250.000</span>
+              </div>
+              <div class="time-slot available">
+                <strong>22:00</strong><span>200.000</span>
+              </div>
+              <div class="time-slot available">
+                <strong>23:00</strong><span>150.000</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="booking-card">
+            <h3 class="card-title">Thông tin đặt sân</h3>
+
+            <div class="summary-grid">
+              <div class="summary-item">
+                <span>Sân</span>
+                <strong id="summary-ten-san">Đang tải...</strong>
+              </div>
+
+              <div class="summary-item">
+                <span>Ngày</span>
+                <strong id="summary-ngay"></strong>
+              </div>
+
+              <div class="summary-item">
+                <span>Khung giờ</span>
+                <strong id="summary-gio"></strong>
+              </div>
+
+              <div class="summary-item">
+                <span>Thành tiền</span>
+                <strong id="summary-tien" class="total-price">0đ</strong>
+              </div>
+            </div>
+
+            <button id="btn-tiep-tuc" class="btn-continue">Tiếp tục</button>
+          </div>
         </main>
-    </div>
-</div>
-
-<footer class="site-footer">
-    <div class="container footer-grid">
-        <div>
-            <h3><i class="fas fa-futbol"></i> Booking Football</h3>
-            <p>Nền tảng đặt sân bóng đá hàng đầu Việt Nam. Nhanh chóng - Tiện lợi - Uy tín.</p>
-            <div class="social-icons">
-                <i class="fab fa-facebook-f"></i>
-                <i class="fab fa-youtube"></i>
-                <i class="fas fa-globe"></i>
-            </div>
-        </div>
-
-        <div>
-            <h4>DỊCH VỤ</h4>
-            <ul>
-                <li>Đặt sân</li>
-                <li>Tìm sân</li>
-                <li>Giới thiệu</li>
-                <li>Tin tức</li>
-            </ul>
-        </div>
-
-        <div>
-            <h4>HỖ TRỢ</h4>
-            <ul>
-                <li>Hướng dẫn đặt sân</li>
-                <li>Câu hỏi thường gặp</li>
-                <li>Chính sách bảo mật</li>
-                <li>Điều khoản sử dụng</li>
-            </ul>
-        </div>
-
-        <div>
-            <h4>LIÊN HỆ</h4>
-            <ul>
-                <li>Hotline: 1900 1234</li>
-                <li>Email: support@bookingfootball.vn</li>
-                <li>Địa chỉ: 123 Nguyễn Trãi, Thanh Xuân, Hà Nội</li>
-            </ul>
-        </div>
+      </div>
     </div>
 
-    <div class="footer-bottom">
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <h3><i class="fas fa-futbol"></i> Booking Football</h3>
+          <p>
+            Nền tảng đặt sân bóng đá hàng đầu Việt Nam. Nhanh chóng - Tiện lợi -
+            Uy tín.
+          </p>
+          <div class="social-icons">
+            <i class="fab fa-facebook-f"></i>
+            <i class="fab fa-youtube"></i>
+            <i class="fas fa-globe"></i>
+          </div>
+        </div>
+
+        <div>
+          <h4>DỊCH VỤ</h4>
+          <ul>
+            <li>Đặt sân</li>
+            <li>Tìm sân</li>
+            <li>Giới thiệu</li>
+            <li>Tin tức</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>HỖ TRỢ</h4>
+          <ul>
+            <li>Hướng dẫn đặt sân</li>
+            <li>Câu hỏi thường gặp</li>
+            <li>Chính sách bảo mật</li>
+            <li>Điều khoản sử dụng</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>LIÊN HỆ</h4>
+          <ul>
+            <li>Hotline: 1900 1234</li>
+            <li>Email: support@bookingfootball.vn</li>
+            <li>Địa chỉ: 123 Nguyễn Trãi, Thanh Xuân, Hà Nội</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
         <p>© 2026 Booking Football. All rights reserved.</p>
-    </div>
-</footer>
+      </div>
+    </footer>
 
-<script src="../hd/obox1.js"></script>
-<script src="../hd/datsanimage.js"></script>
+    <script src="../hd/obox1.js"></script>
+    <script src="../hd/datsanimage.js"></script>
 
-<script>
-const params = new URLSearchParams(window.location.search);
-const id = params.get("id");
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get("id");
 
-let currentDate = new Date();
-let selectedDate = null;
-let selectedHour = null;
-let selectedPrice = 0;
+      let currentDate = new Date();
+      let selectedDate = null;
+      let selectedHour = null;
+      let selectedPrice = 0;
 
-const btnTiepTuc = document.getElementById("btn-tiep-tuc");
-const calendarGrid = document.getElementById("calendar-grid");
-const calendarTitle = document.getElementById("calendar-title");
+      const btnTiepTuc = document.getElementById("btn-tiep-tuc");
+      const calendarGrid = document.getElementById("calendar-grid");
+      const calendarTitle = document.getElementById("calendar-title");
 
-const summaryTenSan = document.getElementById("summary-ten-san");
-const summaryNgay = document.getElementById("summary-ngay");
-const summaryGio = document.getElementById("summary-gio");
-const summaryTien = document.getElementById("summary-tien");
+      const summaryTenSan = document.getElementById("summary-ten-san");
+      const summaryNgay = document.getElementById("summary-ngay");
+      const summaryGio = document.getElementById("summary-gio");
+      const summaryTien = document.getElementById("summary-tien");
 
-btnTiepTuc.disabled = true;
+      btnTiepTuc.disabled = true;
 
-function checkBookingReady() {
-    btnTiepTuc.disabled = !(selectedDate && selectedHour);
-}
+      function checkBookingReady() {
+        btnTiepTuc.disabled = !(selectedDate && selectedHour);
+      }
 
-if (id && id !== "undefined") {
-    fetch("http://localhost:8080/api/fields/" + id)
-        .then(res => res.json())
-        .then(field => {
-            document.getElementById("ten-san-chi-tiet").innerText = field.fieldName;
-            document.getElementById("dia-chi-chi-tiet").innerText = field.address;
+      if (id && id !== "undefined") {
+        fetch("http://localhost:8080/api/fields/" + id)
+          .then((res) => res.json())
+          .then((field) => {
+            document.getElementById("ten-san-chi-tiet").innerText =
+              field.fieldName;
+            document.getElementById("dia-chi-chi-tiet").innerText =
+              field.address;
             summaryTenSan.innerText = field.fieldName;
-        })
-        .catch(error => console.error("Lỗi lấy sân:", error));
-} else {
-    alert("Không tìm thấy ID sân. Vui lòng quay lại trang chủ chọn sân.");
-}
+          })
+          .catch((error) => console.error("Lỗi lấy sân:", error));
+      } else {
+        alert("Không tìm thấy ID sân. Vui lòng quay lại trang chủ chọn sân.");
+      }
 
-function formatDateVN(date) {
-    return date.toLocaleDateString("vi-VN");
-}
+      function formatDateVN(date) {
+        return date.toLocaleDateString("vi-VN");
+      }
 
-function isPastDate(date) {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+      function isPastDate(date) {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
 
-    const checkDate = new Date(date);
-    checkDate.setHours(0, 0, 0, 0);
+        const checkDate = new Date(date);
+        checkDate.setHours(0, 0, 0, 0);
 
-    return checkDate < today;
-}
+        return checkDate < today;
+      }
 
-function getDateStringLocal(date) {
-    const yyyy = date.getFullYear();
-    const mm = String(date.getMonth() + 1).padStart(2, "0");
-    const dd = String(date.getDate()).padStart(2, "0");
-    return `${yyyy}-${mm}-${dd}`;
-}
+      function getDateStringLocal(date) {
+        const yyyy = date.getFullYear();
+        const mm = String(date.getMonth() + 1).padStart(2, "0");
+        const dd = String(date.getDate()).padStart(2, "0");
+        return `${yyyy}-${mm}-${dd}`;
+      }
 
-function renderCalendar() {
-    calendarGrid.innerHTML = "";
+      function renderCalendar() {
+        calendarGrid.innerHTML = "";
 
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth();
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
 
-    calendarTitle.innerText = `Tháng ${month + 1}, ${year}`;
+        calendarTitle.innerText = `Tháng ${month + 1}, ${year}`;
 
-    const dayNames = ["T2", "T3", "T4", "T5", "T6", "T7", "CN"];
+        const dayNames = ["T2", "T3", "T4", "T5", "T6", "T7", "CN"];
 
-    dayNames.forEach(day => {
-        const div = document.createElement("div");
-        div.className = "cal-day-name";
-        div.innerText = day;
-        calendarGrid.appendChild(div);
-    });
+        dayNames.forEach((day) => {
+          const div = document.createElement("div");
+          div.className = "cal-day-name";
+          div.innerText = day;
+          calendarGrid.appendChild(div);
+        });
 
-    const firstDay = new Date(year, month, 1);
-    const lastDate = new Date(year, month + 1, 0).getDate();
+        const firstDay = new Date(year, month, 1);
+        const lastDate = new Date(year, month + 1, 0).getDate();
 
-    let startDay = firstDay.getDay();
-    startDay = startDay === 0 ? 7 : startDay;
+        let startDay = firstDay.getDay();
+        startDay = startDay === 0 ? 7 : startDay;
 
-    for (let i = 1; i < startDay; i++) {
-        const empty = document.createElement("div");
-        empty.className = "cal-day empty";
-        calendarGrid.appendChild(empty);
-    }
-
-    for (let day = 1; day <= lastDate; day++) {
-        const date = new Date(year, month, day);
-
-        const div = document.createElement("div");
-        div.className = "cal-day";
-        div.innerText = day;
-
-        if (isPastDate(date)) {
-            div.classList.add("disabled");
-        } else {
-            div.addEventListener("click", async function () {
-                document.querySelectorAll(".cal-day")
-                    .forEach(d => d.classList.remove("active"));
-
-                div.classList.add("active");
-
-                selectedDate = date;
-                summaryNgay.innerText = formatDateVN(date);
-
-                checkBookingReady();
-                await loadBookedHours();
-            });
+        for (let i = 1; i < startDay; i++) {
+          const empty = document.createElement("div");
+          empty.className = "cal-day empty";
+          calendarGrid.appendChild(empty);
         }
 
-        calendarGrid.appendChild(div);
-    }
-}
+        for (let day = 1; day <= lastDate; day++) {
+          const date = new Date(year, month, day);
 
-document.getElementById("prev-month").addEventListener("click", function () {
-    currentDate.setMonth(currentDate.getMonth() - 1);
-    renderCalendar();
-});
+          const div = document.createElement("div");
+          div.className = "cal-day";
+          div.innerText = day;
 
-document.getElementById("next-month").addEventListener("click", function () {
-    currentDate.setMonth(currentDate.getMonth() + 1);
-    renderCalendar();
-});
+          if (isPastDate(date)) {
+            div.classList.add("disabled");
+          } else {
+            div.addEventListener("click", async function () {
+              document
+                .querySelectorAll(".cal-day")
+                .forEach((d) => d.classList.remove("active"));
 
-document.querySelectorAll(".time-slot").forEach(slot => {
-    slot.addEventListener("click", function () {
-        if (slot.classList.contains("booked")) return;
+              div.classList.add("active");
 
-        document.querySelectorAll(".time-slot")
-            .forEach(s => s.classList.remove("selected"));
+              selectedDate = date;
+              summaryNgay.innerText = formatDateVN(date);
 
-        slot.classList.add("selected");
+              checkBookingReady();
+              await loadBookedHours();
+            });
+          }
 
-        selectedHour = slot.querySelector("strong").innerText;
+          calendarGrid.appendChild(div);
+        }
+      }
 
-        selectedPrice = parseInt(
-            slot.querySelector("span").innerText.replace(/\./g, "")
-        );
+      document
+        .getElementById("prev-month")
+        .addEventListener("click", function () {
+          currentDate.setMonth(currentDate.getMonth() - 1);
+          renderCalendar();
+        });
 
-        summaryGio.innerText = selectedHour;
-        summaryTien.innerText = selectedPrice.toLocaleString("vi-VN") + "đ";
+      document
+        .getElementById("next-month")
+        .addEventListener("click", function () {
+          currentDate.setMonth(currentDate.getMonth() + 1);
+          renderCalendar();
+        });
 
-        checkBookingReady();
-    });
-});
+      document.querySelectorAll(".time-slot").forEach((slot) => {
+        slot.addEventListener("click", function () {
+          if (slot.classList.contains("booked")) return;
 
-btnTiepTuc.addEventListener("click", async function () {
-    if (!selectedDate) {
-        alert("Chọn ngày");
-        return;
-    }
+          document
+            .querySelectorAll(".time-slot")
+            .forEach((s) => s.classList.remove("selected"));
 
-    if (!selectedHour) {
-        alert("Chọn giờ");
-        return;
-    }
+          slot.classList.add("selected");
 
-    const userId = localStorage.getItem("userId");
+          selectedHour = slot.querySelector("strong").innerText;
 
-    if (!userId) {
-        alert("Vui lòng đăng nhập");
-        return;
-    }
+          selectedPrice = parseInt(
+            slot.querySelector("span").innerText.replace(/\./g, ""),
+          );
 
-    const dateString = getDateStringLocal(selectedDate);
-    const startTime = `${dateString}T${selectedHour}:00`;
+          summaryGio.innerText = selectedHour;
+          summaryTien.innerText = selectedPrice.toLocaleString("vi-VN") + "đ";
 
-    const bookingData = {
-        userId: Number(userId),
-        pitchId: Number(id),
-        startTime: startTime,
-        hours: 1,
-        totalPrice: selectedPrice
-    };
+          checkBookingReady();
+        });
+      });
 
-    console.log("BOOKING DATA:", bookingData);
+      btnTiepTuc.addEventListener("click", async function () {
+        if (!selectedDate) {
+          alert("Chọn ngày");
+          return;
+        }
 
-    try {
-        const response = await fetch("http://localhost:8080/api/bookings", {
+        if (!selectedHour) {
+          alert("Chọn giờ");
+          return;
+        }
+
+        const userId = localStorage.getItem("userId");
+
+        if (!userId) {
+          alert("Vui lòng đăng nhập");
+          return;
+        }
+
+        const dateString = getDateStringLocal(selectedDate);
+        const startTime = `${dateString}T${selectedHour}:00`;
+
+        const bookingData = {
+          userId: Number(userId),
+          pitchId: Number(id),
+          startTime: startTime,
+          hours: 1,
+          totalPrice: selectedPrice,
+        };
+
+        console.log("BOOKING DATA:", bookingData);
+
+        try {
+          const response = await fetch("http://localhost:8080/api/bookings", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+              "Content-Type": "application/json",
             },
-            body: JSON.stringify(bookingData)
-        });
+            body: JSON.stringify(bookingData),
+          });
 
-        const text = await response.text();
+          const text = await response.text();
 
-        let result = {};
-        try {
+          let result = {};
+          try {
             result = JSON.parse(text);
-        } catch (e) {
+          } catch (e) {
             result = { message: text };
-        }
+          }
 
-        if (!response.ok) {
+          if (!response.ok) {
             throw new Error(result.message || "Đặt sân thất bại");
+          }
+
+          localStorage.removeItem("bookingStatus");
+
+          localStorage.setItem("bookingId", result.id);
+          localStorage.setItem("bookingField", summaryTenSan.innerText);
+          localStorage.setItem("bookingDate", summaryNgay.innerText);
+          localStorage.setItem("bookingTime", summaryGio.innerText);
+          localStorage.setItem("bookingPrice", summaryTien.innerText);
+
+          window.location.href = "thanhtoan.html";
+        } catch (err) {
+          alert(err.message);
         }
+      });
 
-        localStorage.removeItem("bookingStatus");
+      async function loadBookedHours() {
+        if (!selectedDate || !id || id === "undefined") return;
 
-        localStorage.setItem("bookingId", result.id);
-        localStorage.setItem("bookingField", summaryTenSan.innerText);
-        localStorage.setItem("bookingDate", summaryNgay.innerText);
-        localStorage.setItem("bookingTime", summaryGio.innerText);
-        localStorage.setItem("bookingPrice", summaryTien.innerText);
+        try {
+          const response = await fetch(
+            `http://localhost:8080/api/bookings/field/${id}`,
+          );
 
-        window.location.href = "thanhtoan.html";
-
-    } catch (err) {
-        alert(err.message);
-    }
-});
-
-async function loadBookedHours() {
-    if (!selectedDate || !id || id === "undefined") return;
-
-    try {
-        const response = await fetch(
-            `http://localhost:8080/api/bookings/field/${id}`
-        );
-
-        if (!response.ok) {
+          if (!response.ok) {
             console.error("API lỗi:", response.status);
             return;
-        }
+          }
 
-        const bookings = await response.json();
+          const bookings = await response.json();
 
-        if (!Array.isArray(bookings)) {
+          if (!Array.isArray(bookings)) {
             console.error("bookings không phải mảng:", bookings);
             return;
-        }
+          }
 
-        document.querySelectorAll(".time-slot").forEach(slot => {
+          document.querySelectorAll(".time-slot").forEach((slot) => {
             slot.classList.remove("booked");
-        });
+          });
 
-        const selectedDateString = getDateStringLocal(selectedDate);
+          const selectedDateString = getDateStringLocal(selectedDate);
 
-        bookings.forEach(booking => {
+          bookings.forEach((booking) => {
             const bookingDate = booking.startTime.split("T")[0];
 
             if (bookingDate !== selectedDateString) return;
 
             const bookingHour = booking.startTime.substring(11, 16);
 
-            document.querySelectorAll(".time-slot").forEach(slot => {
-                const hour = slot.querySelector("strong").innerText;
+            document.querySelectorAll(".time-slot").forEach((slot) => {
+              const hour = slot.querySelector("strong").innerText;
 
-                if (hour === bookingHour) {
-                    slot.classList.add("booked");
-                }
+              if (hour === bookingHour) {
+                slot.classList.add("booked");
+              }
             });
-        });
+          });
+        } catch (error) {
+          console.error("Lỗi loadBookedHours:", error);
+        }
+      }
 
-    } catch (error) {
-        console.error("Lỗi loadBookedHours:", error);
-    }
-}
+      renderCalendar();
+    </script>
 
-renderCalendar();
-</script>
+    <script>
+      const authButtons = document.getElementById("auth-buttons");
+      const isLogin = localStorage.getItem("isLogin");
+      const fullName = localStorage.getItem("fullName");
 
-<script>
-const authButtons = document.getElementById("auth-buttons");
-const isLogin = localStorage.getItem("isLogin");
-const fullName = localStorage.getItem("fullName");
-
-if (isLogin === "true") {
-    authButtons.innerHTML = `
+      if (isLogin === "true") {
+        authButtons.innerHTML = `
         <span style="font-weight:bold;color:#008940;">
             Xin chào, ${fullName || "người dùng"}
         </span>
@@ -493,17 +560,16 @@ if (isLogin === "true") {
             Đăng xuất
         </button>
     `;
-}
+      }
 
-function logout() {
-    localStorage.removeItem("userId");
-    localStorage.removeItem("fullName");
-    localStorage.removeItem("phone");
-    localStorage.removeItem("isLogin");
+      function logout() {
+        localStorage.removeItem("userId");
+        localStorage.removeItem("fullName");
+        localStorage.removeItem("phone");
+        localStorage.removeItem("isLogin");
 
-    window.location.href = "dangnhap.html";
-}
-</script>
-
-</body>
+        window.location.href = "dangnhap.html";
+      }
+    </script>
+  </body>
 </html>
