@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý đơn đặt sân - Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f5f7f9;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, #008940 0%, #006b32 100%);
+            color: white;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .page-header a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .page-header a:hover {
+            opacity: 0.8;
+        }
+
+        .page-header h1 {
+            margin: 0;
+            flex: 1;
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .booking-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .booking-card:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+            transform: translateY(-2px);
+        }
+
+        .booking-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .booking-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .booking-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+            font-size: 14px;
+        }
+
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .detail-label {
+            color: #888;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+
+        .detail-value {
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .status {
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status.pending {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+
+        .status.confirmed {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status.cancelled {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .status.completed {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .status.no_show {
+            background: #e2e3e5;
+            color: #383d41;
+            border: 1px solid #d6d8db;
+        }
+
+        .booking-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .booking-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: #008940;
+        }
+
+        .btn-cancel {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-cancel:hover:not(:disabled) {
+            background-color: #c82333;
+            box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+        }
+
+        .btn-cancel:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        #message {
+            color: #d32f2f;
+            margin-top: 20px;
+            padding: 16px;
+            background: #ffebee;
+            border-radius: 8px;
+            display: none;
+            border-left: 4px solid #d32f2f;
+            font-weight: 500;
+        }
+
+        #message.success {
+            color: #155724;
+            background: #d4edda;
+            border-left-color: #28a745;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 40px;
+            color: #888;
+            background: white;
+            border-radius: 12px;
+            border: 2px dashed #ddd;
+        }
+
+        .empty-state-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .empty-state-text {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .empty-state-subtext {
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f0f0f0;
+            border-top: 4px solid #008940;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 16px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: #008940;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .filter-section {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: #666;
+        }
+
+        .filter-btn:hover {
+            border-color: #008940;
+            color: #008940;
+        }
+
+        .filter-btn.active {
+            background: #008940;
+            color: white;
+            border-color: #008940;
+        }
+
+        .demo-controls {
+            background: #e8f5e9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid #008940;
+        }
+
+        .demo-controls h3 {
+            color: #008940;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+
+        .demo-controls button {
+            background: #008940;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            transition: background 0.3s ease;
+        }
+
+        .demo-controls button:hover {
+            background: #006b32;
+        }
+
+        @media (max-width: 768px) {
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .page-header h1 {
+                width: 100%;
+                margin-top: 10px;
+            }
+
+            .booking-details {
+                grid-template-columns: 1fr;
+            }
+
+            .booking-footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .container {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-header">
+        <a href="javascript:history.back()">← Quay lại</a>
+        <h1>Quản lý đặt sân</h1>
+    </div>
+    
+    <div class="container">
+        <div class="demo-controls">
+            <h3>🎬 Điều khiển Demo</h3>
+            <button onclick="showLoadingState()">Hiển thị Loading</button>
+            <button onclick="showEmptyState()">Hiển thị Empty State</button>
+            <button onclick="showBookings()">Hiển thị Danh sách</button>
+            <button onclick="showSuccessMessage()">Hiển thị Thông báo Thành công</button>
+            <button onclick="showErrorMessage()">Hiển thị Thông báo Lỗi</button>
+        </div>
+
+        <h2>📋 Lịch sử đặt sân của tôi</h2>
+        
+        <div class="filter-section" id="filterSection">
+            <button class="filter-btn active" onclick="filterBookings('all')">Tất cả</button>
+            <button class="filter-btn" onclick="filterBookings('pending')">Chờ duyệt</button>
+            <button class="filter-btn" onclick="filterBookings('confirmed')">Đã xác nhận</button>
+            <button class="filter-btn" onclick="filterBookings('completed')">Hoàn thành</button>
+            <button class="filter-btn" onclick="filterBookings('cancelled')">Đã hủy</button>
+        </div>
+
+        <div id="loading" class="loading" style="display: none;">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Đang tải dữ liệu...</div>
+        </div>
+
+        <div id="bookingList"></div>
+
+        <div id="emptyState" class="empty-state" style="display: none;">
+            <div class="empty-state-icon">📭</div>
+            <div class="empty-state-text">Chưa có đặt sân nào</div>
+            <div class="empty-state-subtext">Hãy đặt sân để bắt đầu</div>
+        </div>
+
+        <div id="message"></div>
+    </div>
+
+    <script>
+        const sampleBookings = [
+            {
+                id: 1,
+                name: "Sân bóng Bình Phú",
+                time: "14:00 - 16:00",
+                date: "2024-06-10",
+                status: "confirmed",
+                price: 500000,
+                location: "Quận 1, TPHCM"
+            },
+            {
+                id: 2,
+                name: "Sân bóng Tân Bình",
+                time: "18:00 - 20:00",
+                date: "2024-06-12",
+                status: "pending",
+                price: 450000,
+                location: "Quận Tân Bình, TPHCM"
+            },
+            {
+                id: 3,
+                name: "Sân bóng Thủ Đức",
+                time: "16:00 - 18:00",
+                date: "2024-06-08",
+                status: "completed",
+                price: 480000,
+                location: "Quận Thủ Đức, TPHCM"
+            },
+            {
+                id: 4,
+                name: "Sân bóng Gò Vấp",
+                time: "19:00 - 21:00",
+                date: "2024-06-05",
+                status: "cancelled",
+                price: 520000,
+                location: "Quận Gò Vấp, TPHCM"
+            },
+            {
+                id: 5,
+                name: "Sân bóng Phú Nhuận",
+                time: "15:00 - 17:00",
+                date: "2024-06-15",
+                status: "confirmed",
+                price: 470000,
+                location: "Quận Phú Nhuận, TPHCM"
+            }
+        ];
+
+        function renderBookings(bookings = sampleBookings) {
+            const bookingList = document.getElementById('bookingList');
+            if (bookings.length === 0) {
+                showEmptyState();
+                return;
+            }
+
+            bookingList.innerHTML = bookings.map(booking => `
+                <div class="booking-card">
+                    <div class="booking-header">
+                        <div class="booking-title">${booking.name}</div>
+                        <span class="status ${booking.status}">${getStatusLabel(booking.status)}</span>
+                    </div>
+                    <div class="booking-details">
+                        <div class="detail-item">
+                            <span class="detail-label">📅 Ngày</span>
+                            <span class="detail-value">${booking.date}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">⏰ Giờ</span>
+                            <span class="detail-value">${booking.time}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">📍 Địa điểm</span>
+                            <span class="detail-value">${booking.location}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">💳 Tổng tiền</span>
+                            <span class="detail-value">${booking.price.toLocaleString('vi-VN')}đ</span>
+                        </div>
+                    </div>
+                    <div class="booking-footer">
+                        <div class="booking-price">${booking.price.toLocaleString('vi-VN')}đ</div>
+                        <button class="btn-cancel" ${booking.status !== 'pending' && booking.status !== 'confirmed' ? 'disabled' : ''}>
+                            ${booking.status === 'cancelled' ? 'Đã hủy' : 'Hủy đặt'}
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+            document.getElementById('emptyState').style.display = 'none';
+            document.getElementById('message').style.display = 'none';
+        }
+
+        function getStatusLabel(status) {
+            const labels = {
+                pending: '⏳ Chờ duyệt',
+                confirmed: '✓ Đã xác nhận',
+                cancelled: '✗ Đã hủy',
+                completed: '✓ Hoàn thành',
+                no_show: '⊘ Không đến'
+            };
+            return labels[status] || status;
+        }
+
+        function showLoadingState() {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('bookingList').innerHTML = '';
+            document.getElementById('emptyState').style.display = 'none';
+            document.getElementById('message').style.display = 'none';
+            document.getElementById('filterSection').style.display = 'flex';
+        }
+
+        function showEmptyState() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('bookingList').innerHTML = '';
+            document.getElementById('emptyState').style.display = 'block';
+            document.getElementById('message').style.display = 'none';
+            document.getElementById('filterSection').style.display = 'none';
+        }
+
+        function showBookings() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('emptyState').style.display = 'none';
+            document.getElementById('message').style.display = 'none';
+            document.getElementById('filterSection').style.display = 'flex';
+            renderBookings();
+        }
+
+        function showSuccessMessage() {
+            showBookings();
+            const messageEl = document.getElementById('message');
+            messageEl.textContent = '✓ Hủy đặt sân thành công!';
+            messageEl.classList.add('success');
+            messageEl.style.display = 'block';
+        }
+
+        function showErrorMessage() {
+            showBookings();
+            const messageEl = document.getElementById('message');
+            messageEl.textContent = '✗ Không thể hủy đặt sân. Vui lòng thử lại!';
+            messageEl.classList.remove('success');
+            messageEl.style.display = 'block';
+        }
+
+        function filterBookings(status) {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            filterBtns.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            if (status === 'all') {
+                renderBookings(sampleBookings);
+            } else {
+                const filtered = sampleBookings.filter(b => b.status === status);
+                renderBookings(filtered);
+            }
+        }
+
+        // Initial load
+        window.addEventListener('load', function() {
+            showBookings();
+        });
+    </script>
+</body>
+</html>
