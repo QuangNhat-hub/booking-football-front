@@ -46,7 +46,6 @@ fetch("http://localhost:8080/api/fields")
                     <div style="position: absolute; top: 10px; right: 10px; background-color: ${statusColor}; color: white; padding: 5px 10px; border-radius: 5px; font-weight: bold; font-size: 12px; z-index: 10;">
                         ${currentStatus}
                     </div>
-
                     <img src="${linkAnh}" alt="Sân bóng" class="pitch-img" style="${isMaintenance ? 'filter: grayscale(100%);' : ''}">
                     <div class="pitch-info">
                         <div class="pitch-header">
