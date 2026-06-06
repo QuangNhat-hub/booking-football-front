@@ -172,6 +172,8 @@
 
             const imgStyle = isMaintenance ? "filter: grayscale(100%);" : "";
 
+            const rating = field.averageRating ? field.averageRating.toFixed(1) : "5.0";
+
             const badgeHTML = isMaintenance
               ? `
                     <div style="
@@ -214,7 +216,6 @@
                         <div class="pitch-info">
                             <div class="pitch-header">
                                 <h3 class="pitch-name">${field.fieldName}</h3>
-                              const rating = field.averageRating ? field.averageRating.toFixed(1) : "5.0";
                               <span class="pitch-rating"><i class="fas fa-star"></i> ${rating}</span>
                             </div>
 
