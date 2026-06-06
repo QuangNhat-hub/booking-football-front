@@ -4,8 +4,6 @@ const fieldId = urlParams.get('fieldId') || urlParams.get('id') || 1; // ID củ
 
 // Giả định bồ lưu thông tin đăng nhập và đơn đặt sân sau khi hoàn thành vào localStorage
 const userId = localStorage.getItem('userId') || 1; 
-const bookingId = localStorage.getItem('currentBookingId') || 101; // Cần bookingId vì Backend bắt buộc (nullable = false)
-
 // Cấu hình đúng đường dẫn API dẫn đến ReviewController của bồ
 const BASE_URL = 'http://localhost:8080/api/reviews';
 
@@ -86,20 +84,17 @@ function loadReviewsList() {
         });
 }
 
-// 4. KIỂM TRA ĐIỀU KIỆN ĐỂ HIỆN KHUNG ĐÁNH GIÁ
+// 4. KIỂM TRA ĐIỀU KIỆN ĐỂ HIỆN KHUNG ĐÁNH GIÁ (Luật mới)
 function checkBookingStatus() {
-    // Đoạn này gọi đến endpoint kiểm tra lịch sử đá sân của bồ (ví dụ: /api/bookings/completed)
-    fetch(`http://localhost:8080/api/bookings/completed?userId=${userId}&fieldId=${fieldId}`)
-        .then(res => res.json())
-        .then(hasCompleted => {
-            if (hasCompleted === true) {
-                document.getElementById("area-viet-danh-gia").style.display = "block";
-            }
-        })
-        .catch(err => {
-            // Demo local: Nếu chưa làm API check đặt sân, bồ có thể mở dòng dưới để ép buộc hiện khung demo cho thầy xem:
-            document.getElementById("area-viet-danh-gia").style.display = "block";
-        });
+    const isLogin = localStorage.getItem("isLogin");
+    
+    // Nếu đã đăng nhập thì mở thẳng khung đánh giá luôn
+    if (isLogin === "true") {
+        document.getElementById("area-viet-danh-gia").style.display = "block";
+    } else {
+        // Chưa đăng nhập thì giấu đi (hoặc có thể in ra câu báo "Vui lòng đăng nhập để đánh giá")
+        document.getElementById("area-viet-danh-gia").style.display = "none";
+    }
 }
 
 // 5. XỬ LÝ CLICK CHỌN SAO (1-5 SAO)
@@ -139,14 +134,13 @@ function setupSubmitReview() {
             return;
         }
 
-        // Đóng gói JSON đúng chính xác tên biến thuộc tính trong Entity Review của bồ
+        // Đóng gói JSON (Đã xóa dòng bookingId)
         const reviewData = {
-            bookingId: parseInt(bookingId),
-            userId: parseInt(userId),
+            userId: parseInt(localStorage.getItem('userId')), // Lấy trực tiếp ID người đang đăng nhập
             fieldId: parseInt(fieldId),
             rating: parseInt(rating),
             comment: comment,
-            imageUrl: null // Demo local không cần xử lý ảnh
+            imageUrl: null 
         };
 
         // Gửi dữ liệu lên API POST /api/reviews
