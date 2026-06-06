@@ -1,3 +1,4 @@
+// Hàm vẽ danh sách sân bóng (Đã tích hợp đầy đủ UI Bảo trì)
 function renderFields(data) {
     const container = document.getElementById("field-list");
     container.innerHTML = "";
@@ -14,25 +15,48 @@ function renderFields(data) {
     }
 
     data.forEach((field) => {
-      const linkAnh = field.images && field.images.length > 0 ? field.images[0].imageUrl : "../hinhanh/images (1).jpg"; 
-      const cardHTML = `
-              <a href="../giaodien/datsan.html?id=${field.fieldId}" style="text-decoration:none; color:inherit;">
-                  <div class="pitch-card">
-                      <img src="${linkAnh}" alt="Sân bóng" class="pitch-img">
-                      <div class="pitch-info">
-                          <div class="pitch-header">
-                              <h3 class="pitch-name">${field.fieldName}</h3>
-                              <span class="pitch-rating"><i class="fas fa-star"></i> 5.0</span>
-                          </div>
-                          <div class="pitch-footer">
-                              <span class="pitch-location">${field.address}</span>
-                              <span class="pitch-price">Xem chi tiết</span>
-                          </div>
-                      </div>
-                  </div>
-              </a>
-          `;
-      container.insertAdjacentHTML("beforeend", cardHTML);
+        const fieldId = field.fieldId || field.id || field.pitchId;
+        const linkAnh = field.images && field.images.length > 0 ? field.images[0].imageUrl : "../hinhanh/images (1).jpg"; 
+        
+        // --- LOGIC XỬ LÝ BẢO TRÌ ---
+        const isMaintenance = field.status === false;
+        const imgStyle = isMaintenance ? "filter: grayscale(100%);" : "";
+        const rating = field.averageRating ? field.averageRating.toFixed(1) : "5.0";
+
+        // Huy hiệu Bảo trì (Màu đỏ)
+        const badgeHTML = isMaintenance
+            ? `<div style="position:absolute; top:10px; right:10px; background-color:#dc3545; color:white; padding:5px 10px; border-radius:5px; font-weight:bold; font-size:12px; z-index:10;">
+                    Bảo trì
+               </div>`
+            : "";
+
+        // Chặn click nếu đang bảo trì
+        const targetLink = isMaintenance ? "javascript:void(0)" : `../giaodien/datsan.html?id=${fieldId}`;
+        const clickEvent = isMaintenance ? `onclick="alert('Sân bóng này hiện đang được bảo trì. Vui lòng chọn sân khác!');"` : "";
+
+        // Vẽ thẻ HTML
+        const cardHTML = `
+            <a href="${targetLink}" ${clickEvent} style="text-decoration:none; color:inherit; display:block; position:relative;">
+                <div class="pitch-card">
+                    ${badgeHTML}
+                    <img src="${linkAnh}" alt="${field.fieldName}" class="pitch-img" style="${imgStyle}">
+                    
+                    <div class="pitch-info">
+                        <div class="pitch-header">
+                            <h3 class="pitch-name">${field.fieldName}</h3>
+                            <span class="pitch-rating"><i class="fas fa-star"></i> ${rating}</span>
+                        </div>
+                        <div class="pitch-footer">
+                            <span class="pitch-location">${field.address}</span>
+                            <span class="pitch-price" style="${isMaintenance ? "color:#dc3545;font-weight:bold;" : ""}">
+                                ${isMaintenance ? "Tạm ngưng phục vụ" : "Xem chi tiết"}
+                                </span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        `;
+        container.insertAdjacentHTML("beforeend", cardHTML);
     });
 }
 
@@ -40,7 +64,7 @@ function renderFields(data) {
 fetch("http://localhost:8080/api/fields")
   .then(res => res.json())
   .then(data => renderFields(data))
-  .catch(err => console.error("Lỗi:", err));
+  .catch(err => console.error("Lỗi tải danh sách sân:", err));
 
 // 2. TÌM KIẾM THEO TÊN VÀ VỊ TRÍ
 document.getElementById('btn-search').addEventListener('click', function(e) {
@@ -61,5 +85,5 @@ document.getElementById('btn-search').addEventListener('click', function(e) {
             return response.json();
         })
         .then(data => renderFields(data))
-        .catch(error => console.error("Lỗi:", error));
+        .catch(error => console.error("Lỗi tìm kiếm:", error));
 });
