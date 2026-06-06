@@ -62,10 +62,11 @@
               <span id="dia-chi-chi-tiet">Đang tải địa chỉ...</span>
             </p>
 
-            <p class="field-rating">
-              <i class="fas fa-star text-yellow"></i> 4.8 đánh giá
-              <span>(120 lượt đánh giá)</span>
-            </p>
+                <p class="field-rating">
+                   <i class="fas fa-star text-yellow"></i> 
+                   <span id="top-avg-rating">0.0</span> đánh giá 
+                   <span>(<span id="top-total-reviews">0</span> lượt đánh giá)</span>
+                </p>
 
             <div class="facilities-grid">
               <span><i class="fas fa-users"></i> Sân 7 người</span>
@@ -214,6 +215,86 @@
         </main>
       </div>
     </div>
+</div>
+
+<div class="booking-card" style="margin-top: 30px; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); clear: both;">
+        <h3 class="card-title" style="font-size: 18px; font-weight: bold; margin-bottom: 15px; color: #333;">Đánh giá sân bóng</h3>
+        
+        <div class="review-summary mb-3" style="background:#f8f9fa; padding:15px; border-radius:6px;">
+            <div class="d-flex align-items-center" style="gap: 15px;">
+                <h2 class="mb-0 text-warning" id="avgRating" style="font-size: 36px; font-weight: bold; color: #fe9431; margin: 0;">0.0</h2>
+                <div>
+                    <div id="starSummary" style="font-size:20px; color: #fe9431; display: flex; gap: 2px;"></div>
+                    <div class="text-muted small" id="totalReviews" style="color: #666; margin-top: 4px;">(0 đánh giá)</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="area-viet-danh-gia" style="display: none; margin-bottom: 25px; border-bottom: 1px dashed #eee; padding-bottom: 20px;">
+            <h4 style="font-size: 14px; margin-bottom: 10px; color: #333; font-weight: bold;">Chia sẻ trải nghiệm của bạn</h4>
+            
+            <div class="rating-stars-input" style="margin-bottom: 12px; font-size: 24px; color: #ccc; display: flex; gap: 5px;">
+                <span class="star-clickable" data-value="1" style="cursor: pointer;"><i class="far fa-star"></i></span>
+                <span class="star-clickable" data-value="2" style="cursor: pointer;"><i class="far fa-star"></i></span>
+                <span class="star-clickable" data-value="3" style="cursor: pointer;"><i class="far fa-star"></i></span>
+                <span class="star-clickable" data-value="4" style="cursor: pointer;"><i class="far fa-star"></i></span>
+                <span class="star-clickable" data-value="5" style="cursor: pointer;"><i class="far fa-star"></i></span>
+                <input type="hidden" id="review-rating-value" value="0">
+            </div>
+
+            <textarea id="review-comment" placeholder="Sân tốt, cỏ mượt, đèn sáng không bồ?..." 
+                      style="width: 100%; height: 80px; padding: 10px; border: 1px solid #ddd; border-radius: 4px; resize: none; font-size: 13px; margin-bottom: 10px; box-sizing: border-box;"></textarea>
+            
+            <button id="btn-gui-danh-gia" class="btn-solid" style="width: 100%; padding: 11px; font-size: 14px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Gửi đánh giá</button>
+        </div>
+
+        <div id="danh-sach-reviews">
+            <p style="font-size: 13px; color: #888; text-align: center;">Đang tải đánh giá từ hệ thống...</p>
+        </div>
+    </div>
+
+
+<footer class="site-footer">
+    <div class="container footer-grid">
+        <div>
+            <h3><i class="fas fa-futbol"></i> Booking Football</h3>
+            <p>Nền tảng đặt sân bóng đá hàng đầu Việt Nam. Nhanh chóng - Tiện lợi - Uy tín.</p>
+            <div class="social-icons">
+                <i class="fab fa-facebook-f"></i>
+                <i class="fab fa-youtube"></i>
+                <i class="fas fa-globe"></i>
+            </div>
+        </div>
+
+        <div>
+            <h4>DỊCH VỤ</h4>
+            <ul>
+                <li>Đặt sân</li>
+                <li>Tìm sân</li>
+                <li>Giới thiệu</li>
+                <li>Tin tức</li>
+            </ul>
+        </div>
+
+        <div>
+            <h4>HỖ TRỢ</h4>
+            <ul>
+                <li>Hướng dẫn đặt sân</li>
+                <li>Câu hỏi thường gặp</li>
+                <li>Chính sách bảo mật</li>
+                <li>Điều khoản sử dụng</li>
+            </ul>
+        </div>
+
+        <div>
+            <h4>LIÊN HỆ</h4>
+            <ul>
+                <li>Hotline: 1900 1234</li>
+                <li>Email: support@bookingfootball.vn</li>
+                <li>Địa chỉ: 123 Nguyễn Trãi, Thanh Xuân, Hà Nội</li>
+            </ul>
+        </div>
+    </div>
 
     <footer class="site-footer">
       <div class="container footer-grid">
@@ -265,8 +346,10 @@
       </div>
     </footer>
 
-    <script src="../hd/obox1.js"></script>
-    <script src="../hd/datsanimage.js"></script>
+
+<script src="../hd/obox1.js"></script>
+<script src="../hd/datsanimage.js"></script>
+<script src="../hd/review.js"></script>
 
     <script>
       const params = new URLSearchParams(window.location.search);

@@ -214,9 +214,8 @@
                         <div class="pitch-info">
                             <div class="pitch-header">
                                 <h3 class="pitch-name">${field.fieldName}</h3>
-                                <span class="pitch-rating">
-                                    <i class="fas fa-star"></i> 5.0
-                                </span>
+                              const rating = field.averageRating ? field.averageRating.toFixed(1) : "5.0";
+                              <span class="pitch-rating"><i class="fas fa-star"></i> ${rating}</span>
                             </div>
 
                             <div class="pitch-footer">
